@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark:bg-gray-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,22 +31,25 @@
 <meta property="twitter:description" content="Welcome to my site. Check it out!">
 <meta property="twitter:image" content="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1685597210/animation_500_licp1qfh_qwm6a4.gif">
 
-<link
-  rel="stylesheet"
-  media="(prefers-color-scheme:light)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css"
-/>
-<link
-  rel="stylesheet"
-  media="(prefers-color-scheme:dark)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css"
-  onload="document.documentElement.classList.add('sl-theme-dark');"
-/>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#1a202c',
+                            text: '#e2e8f0',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-dark-bg text-gray-900 dark:text-dark-text">
     <div class="container mx-auto px-4 py-8">
         <!-- Profile Header -->
         <div class="flex flex-col md:flex-row items-center mb-8">
@@ -54,11 +57,11 @@
                 <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688865185/IMG_0453_2_tiieqy.jpg" alt="Profile Picture" class="w-full h-full object-cover">
             </div>
             <div class="text-center md:text-left">
-                <h1 class="text-2xl font-bold">Human...2.0</h1>
-                <p class="text-gray-600">Exploring the digital landscape</p>
+                <h1 class="text-2xl font-bold dark:text-white">Couch Potato Extraordinaire</h1>
+                <p class="text-gray-600 dark:text-gray-400">If I fits, I sits</p>
                 <div class="mt-2">
                     <button id="followBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2">Follow</button>
-                    <button id="messageBtn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md">Message</button>
+                    <button id="messageBtn" class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-md">Message</button>
                 </div>
             </div>
         </div>
@@ -66,49 +69,54 @@
         <!-- Stats -->
         <div class="flex justify-center mb-8">
             <div class="text-center mx-4">
-                <span class="font-bold text-xl">10</span>
-                <p class="text-gray-600">Platforms</p>
+                <span class="font-bold text-xl dark:text-white">All</span>
+                <p class="text-gray-600 dark:text-gray-400">Platforms</p>
             </div>
             <div class="text-center mx-4">
-                <span class="font-bold text-xl">5.2M</span>
-                <p class="text-gray-600">Followers</p>
+                <span class="font-bold text-xl dark:text-white">2Trillion</span>
+                <p class="text-gray-600 dark:text-gray-400">Followers</p>
             </div>
             <div class="text-center mx-4">
-                <span class="font-bold text-xl">1.5K</span>
-                <p class="text-gray-600">Following</p>
+                <span class="font-bold text-xl dark:text-white">1</span>
+                <p class="text-gray-600 dark:text-gray-400">Following</p>
             </div>
         </div>
 
         <!-- Social Media Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow">
+            <a href="https://www.facebook.com/profile.php?id=100083584007550" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition duration-300">
                 <i class="fab fa-facebook text-blue-600 text-4xl mb-2"></i>
-                <h3 class="font-bold">Facebook</h3>
-                <p class="text-gray-600">Connect with friends and the world</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold dark:text-white">Facebook</h3>
+                <p class="text-gray-600 dark:text-gray-400">For the Boomers!</p>
+            </a>
+            <a href="https://www.threads.net/@guaconallthethings" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition duration-300">
                 <i class="fab fa-threads text-blue-400 text-4xl mb-2"></i>
-                <h3 class="font-bold">Threads</h3>
-                <p class="text-gray-600">What's happening in the world right now</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold dark:text-white">Threads</h3>
+                <p class="text-gray-600 dark:text-gray-400">It's what's trendy!</p>
+            </a>
+            <a href="https://www.instagram.com/guaconallthethings/" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition duration-300">
                 <i class="fab fa-instagram text-pink-500 text-4xl mb-2"></i>
-                <h3 class="font-bold">Instagram</h3>
-                <p class="text-gray-600">Capture and share the world's moments</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-bold dark:text-white">Instagram</h3>
+                <p class="text-gray-600 dark:text-gray-400">I be lurking...</p>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition duration-300">
                 <i class="fab fa-linkedin text-blue-700 text-4xl mb-2"></i>
-                <h3 class="font-bold">LinkedIn</h3>
-                <p class="text-gray-600">Manage your professional identity</p>
-            </div>
+                <h3 class="font-bold dark:text-white">LinkedIn</h3>
+                <p class="text-gray-600 dark:text-gray-400">Didn't find a job with it.</p>
+            </a>
+            <a href="https://snapchat.com/t/keEgWm8v" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition duration-300">
+                <i class="fab fa-snapchat text-black dark:text-white text-4xl mb-2"></i>
+                <h3 class="font-bold dark:text-white">Snapchat</h3>
+                <p class="text-gray-600 dark:text-gray-400">Slide in</p>
+            </a>
             
         </div>
     </div>
 
     <!-- Popup for affirmations -->
     <div id="affirmationPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <p id="affirmationText" class="text-xl font-bold mb-4"></p>
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+            <p id="affirmationText" class="text-xl font-bold mb-4 dark:text-white"></p>
             <button id="closePopup" class="bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
         </div>
     </div>
@@ -124,7 +132,7 @@
             { name: 'Lion', color: 'text-yellow-600' },
             { name: 'Elephant', color: 'text-gray-600' },
             { name: 'Dolphin', color: 'text-blue-400' },
-            { name: 'Panda', color: 'text-black' },
+            { name: 'Panda', color: 'text-black dark:text-white' },
             { name: 'Tiger', color: 'text-orange-500' },
             { name: 'Koala', color: 'text-gray-400' },
             { name: 'Penguin', color: 'text-blue-900' },
@@ -145,7 +153,7 @@
         followBtn.addEventListener('click', () => {
             const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
             followBtn.textContent = randomAnimal.name;
-            followBtn.className = `${randomAnimal.color} bg-white border border-gray-300 px-4 py-2 rounded-md mr-2`;
+            followBtn.className = `${randomAnimal.color} bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-2 rounded-md mr-2`;
         });
 
         messageBtn.addEventListener('click', () => {
@@ -156,6 +164,20 @@
 
         closePopup.addEventListener('click', () => {
             affirmationPopup.classList.add('hidden');
+        });
+
+        // Check for dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Listen for changes to color scheme
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         });
     </script>
 </body>
