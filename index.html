@@ -31,139 +31,142 @@
 <meta property="twitter:description" content="Welcome to my site. Check it out!">
 <meta property="twitter:image" content="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1685597210/animation_500_licp1qfh_qwm6a4.gif">
 
-<script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.14/build/player/lottie.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            bg: '#121212',
-                            surface: '#1E1E1E',
-                            text: '#E0E0E0'
-                        }
-                    }
+<<script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.14/build/player/lottie.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    dark: {
+                        bg: '#121212',
+                        surface: '#1E1E1E',
+                        text: '#E0E0E0'
+                    },
+                    instagram: '#E4405F',
+                    threads: '#000000',
+                    linkedin: '#0A66C2',
+                    github: '#181717'
                 }
             }
         }
-    </script>
-    <style>
-        body {
-            cursor: none;
-        }
-        .custom-cursor {
-            width: 40px;
-            height: 40px;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-        .social-link {
-            transition: all 0.3s ease;
-        }
-        .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-    </style>
+    }
+</script>
+<style>
+    body {
+        cursor: none;
+    }
+    .custom-cursor {
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+    }
+    .social-link {
+        transition: all 0.3s ease;
+    }
+    .social-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+</style>
 </head>
 <body>
-    <div id="root"></div>
-    <div id="cursor" class="custom-cursor">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8.566 17.842c-.945.82-1.471.864-1.97.083-.5-.78-.905-1.423.066-2.229 1.796-1.49 4.837-3.955 7.637-6.396l.135-.116c.802-.694 1.59-1.376 2.359-2.036 2.218-1.707 2.84-2.19 3.57-1.64.54.405.525.986-.08 1.952-.847 1.353-2.897 3.288-5.73 5.882l-.168.15-1.516 1.36a.5.5 0 0 0 .67.74l1.516-1.36.168-.15c2.874-2.631 4.958-4.596 5.842-6.01.88-1.41.833-2.601-.204-3.384-1.231-.93-2.25-.132-4.731 1.783-.778.667-1.575 1.357-2.385 2.057l-.135.117c-2.76 2.406-5.75 4.827-7.509 6.288-1.704 1.414-1.088 2.853-.154 4.252.933 1.398 2.365 1.907 4.12.234a.5.5 0 0 0-.671-.741zm6.761-6.837a.5.5 0 0 1-.054.706l-5.5 4.79a.5.5 0 0 1-.652-.76l5.5-4.79a.5.5 0 0 1 .706.054z"/>
-        </svg>
-    </div>
+<div id="root"></div>
+<div id="cursor" class="custom-cursor"></div>
 
-    <script type="text/babel">
-        const SocialLink = ({ href, icon, label }) => (
-            <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link block w-full max-w-md mx-auto mb-4 p-4 bg-white dark:bg-dark-surface text-gray-800 dark:text-dark-text rounded-lg shadow-md transition-all duration-300 ease-in-out"
-                data-aos="fade-up"
-                data-aos-duration="500"
-            >
-                <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold">{label}</span>
-                    <i className={`fab ${icon} text-2xl`}></i>
-                </div>
-            </a>
-        );
+<script type="text/babel">
+    const SocialLink = ({ href, icon, label, hoverColor }) => (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`social-link block w-full max-w-md mx-auto mb-4 p-4 bg-white dark:bg-dark-surface text-gray-800 dark:text-dark-text rounded-lg shadow-md transition-all duration-300 ease-in-out hover:text-white hover:bg-${hoverColor}`}
+        >
+            <div className="flex items-center justify-between">
+                <span className="text-lg font-semibold">{label}</span>
+                <i className={`fab ${icon} text-2xl`}></i>
+            </div>
+        </a>
+    );
 
-        const App = () => {
-            React.useEffect(() => {
-                const cursor = document.querySelector('.custom-cursor');
-                const moveCursor = (e) => {
-                    cursor.style.top = `${e.clientY}px`;
-                    cursor.style.left = `${e.clientX}px`;
-                };
-                window.addEventListener('mousemove', moveCursor);
+    const App = () => {
+        React.useEffect(() => {
+            const cursor = document.querySelector('.custom-cursor');
+            const moveCursor = (e) => {
+                cursor.style.top = `${e.clientY}px`;
+                cursor.style.left = `${e.clientX}px`;
+            };
+            window.addEventListener('mousemove', moveCursor);
 
-                lottie.loadAnimation({
-                    container: document.getElementById('lottie-background'),
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: 'https://assets2.lottiefiles.com/packages/lf20_UJNc2t.json'
-                });
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-background'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets2.lottiefiles.com/packages/lf20_UJNc2t.json'
+            });
 
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.classList.add('dark');
+            lottie.loadAnimation({
+                container: cursor,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets3.lottiefiles.com/packages/lf20_bkzkis7i.json', // Rocket animation
+                rendererSettings: {
+                    preserveAspectRatio: 'xMidYMid slice'
                 }
+            });
 
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                    if (e.matches) {
-                        document.documentElement.classList.add('dark');
-                    } else {
-                        document.documentElement.classList.remove('dark');
-                    }
-                });
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
 
-                AOS.init();
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
 
-                return () => {
-                    window.removeEventListener('mousemove', moveCursor);
-                };
-            }, []);
+            return () => {
+                window.removeEventListener('mousemove', moveCursor);
+            };
+        }, []);
 
-            return (
-                <div className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-gray-100 dark:bg-dark-bg text-gray-900 dark:text-dark-text">
-                    <div id="lottie-background" className="absolute inset-0 z-0 opacity-30"></div>
-                    <div className="z-10 text-center px-4 py-8 bg-white/80 dark:bg-dark-surface/80 rounded-xl backdrop-blur-sm">
-                        <img
-                            src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688865185/IMG_0453_2_tiieqy.jpg"
-                            alt="Profile"
-                            className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white dark:border-dark-surface shadow-lg"
-                            data-aos="zoom-in"
-                        />
-                        <h1 className="text-4xl font-bold mb-2" data-aos="fade-up">Bryce Koning</h1>
-                        <p className="text-xl mb-8" data-aos="fade-up" data-aos-delay="100">Couch Potato Extraordinaire</p>
-                        <div className="space-y-4">
-                        <SocialLink href="https://www.instagram.com/guaconallthethings/" icon="fa-instagram" label="Instagram" />
-                        <SocialLink href="https://www.threads.net/@guaconallthethings" icon="fa-threads" label="Threads" />
-                        <SocialLink href="https://www.linkedin.com/in/brycek/" icon="fa-linkedin" label="LinkedIn" />
-                        <SocialLink href="https://github.com/bk-007" icon="fa-github" label="Github" />
+        return (
+            <div className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-gray-100 dark:bg-dark-bg text-gray-900 dark:text-dark-text">
+                <div id="lottie-background" className="absolute inset-0 z-0 opacity-30"></div>
+                <div className="z-10 text-center px-4 py-8 bg-white/80 dark:bg-dark-surface/80 rounded-xl backdrop-blur-sm">
+                    <img
+                        src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688865185/IMG_0453_2_tiieqy.jpg"
+                        alt="Profile"
+                        className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white dark:border-dark-surface shadow-lg"
+                    />
+                    <h1 className="text-4xl font-bold mb-2">Bryce Koning</h1>
+                    <p className="text-xl mb-8">Couch Potato Extraordinaire</p>
+                    <div className="space-y-4">
+                        <SocialLink href="https://www.instagram.com/guaconallthethings/" icon="fa-instagram" label="Instagram" hoverColor="instagram" />
+                        <SocialLink href="https://www.threads.net/@guaconallthethings" icon="fa-threads" label="Threads" hoverColor="threads" />
+                        <SocialLink href="https://www.linkedin.com/in/brycek/" icon="fa-linkedin" label="LinkedIn" hoverColor="linkedin" />
+                        <SocialLink href="https://github.com/bk-007" icon="fa-github" label="GitHub" hoverColor="github" />
                     </div>
-                    </div>
-                    <footer className="absolute bottom-0 w-full text-center py-4 text-sm bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm">
-                        Made by Bryce and Robots ❤️
-                    </footer>
                 </div>
-            );
-        };
+                <footer className="absolute bottom-0 w-full text-center py-4 text-sm bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm">
+                    Made by Bryce and Robots ❤️
+                </footer>
+            </div>
+        );
+    };
 
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
-    <script src="https://kit.fontawesome.com/8470afc509.js" crossorigin="anonymous"></script>
+    ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+<script src="https://kit.fontawesome.com/8470afc509.js" crossorigin="anonymous"></script>
 </body>
 </html>
