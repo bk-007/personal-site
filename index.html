@@ -31,26 +31,18 @@
 <meta property="twitter:description" content="Welcome to my site. Check it out!">
 <meta property="twitter:image" content="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1685597210/animation_500_licp1qfh_qwm6a4.gif">
 
-<<script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.14/build/player/lottie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script>
     tailwind.config = {
-        darkMode: 'class',
         theme: {
             extend: {
-                colors: {
-                    dark: {
-                        bg: '#121212',
-                        surface: '#1E1E1E',
-                        text: '#E0E0E0'
-                    },
-                    instagram: '#E4405F',
-                    threads: '#000000',
-                    linkedin: '#0A66C2',
-                    github: '#181717'
+                fontFamily: {
+                    'sf-pro': ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Arial', 'sans-serif']
                 }
             }
         }
@@ -58,115 +50,108 @@
 </script>
 <style>
     body {
-        cursor: none;
+        background-color: #000;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
     }
-    .custom-cursor {
-        width: 100px;
-        height: 100px;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
+    .hero-section {
+        background: linear-gradient(45deg, #000, #222);
     }
-    .social-link {
-        transition: all 0.3s ease;
+    .product-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .social-link:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    .lottie-container {
+        width: 200px;
+        height: 200px;
     }
 </style>
 </head>
 <body>
 <div id="root"></div>
-<div id="cursor" class="custom-cursor"></div>
 
-<script type="text/babel">
-    const SocialLink = ({ href, icon, label, hoverColor }) => (
-        <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`social-link block w-full max-w-md mx-auto mb-4 p-4 bg-white dark:bg-dark-surface text-gray-800 dark:text-dark-text rounded-lg shadow-md transition-all duration-300 ease-in-out hover:text-white hover:bg-${hoverColor}`}
-        >
-            <div className="flex items-center justify-between">
-                <span className="text-lg font-semibold">{label}</span>
-                <i className={`fab ${icon} text-2xl`}></i>
-            </div>
-        </a>
-    );
+<script>
+    const e = React.createElement;
 
-    const App = () => {
+    function ProductSection({ title, description, lottieData, link }) {
         React.useEffect(() => {
-            const cursor = document.querySelector('.custom-cursor');
-            const moveCursor = (e) => {
-                cursor.style.top = `${e.clientY}px`;
-                cursor.style.left = `${e.clientX}px`;
-            };
-            window.addEventListener('mousemove', moveCursor);
-
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-background'),
+            const anim = lottie.loadAnimation({
+                container: document.getElementById(`lottie-${title}`),
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'https://assets2.lottiefiles.com/packages/lf20_UJNc2t.json'
+                animationData: lottieData
             });
 
-            lottie.loadAnimation({
-                container: cursor,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'https://lottie.host/7b4b30b9-7a2f-4b13-8cd2-96d547dd63cf/Ahv4bLdjNp.json', // Paper plane animation
-                rendererSettings: {
-                    preserveAspectRatio: 'xMidYMid slice'
-                }
-            });
-
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-            }
-
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (e.matches) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            });
-
-            return () => {
-                window.removeEventListener('mousemove', moveCursor);
-            };
+            return () => anim.destroy();
         }, []);
 
-        return (
-            <div className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-gray-100 dark:bg-dark-bg text-gray-900 dark:text-dark-text">
-                <div id="lottie-background" className="absolute inset-0 z-0 opacity-30"></div>
-                <div className="z-10 text-center px-4 py-8 bg-white/80 dark:bg-dark-surface/80 rounded-xl backdrop-blur-sm">
-                    <img
-                        src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688865185/IMG_0453_2_tiieqy.jpg"
-                        alt="Profile"
-                        className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white dark:border-dark-surface shadow-lg"
-                    />
-                    <h1 className="text-4xl font-bold mb-2">Bryce Koning</h1>
-                    <p className="text-xl mb-8">Couch Potato Extraordinaire</p>
-                    <div className="space-y-4">
-                        <SocialLink href="https://www.instagram.com/guaconallthethings/" icon="fa-instagram" label="Instagram" hoverColor="instagram" />
-                        <SocialLink href="https://www.threads.net/@guaconallthethings" icon="fa-threads" label="Threads" hoverColor="threads" />
-                        <SocialLink href="https://www.linkedin.com/in/brycek/" icon="fa-linkedin" label="LinkedIn" hoverColor="linkedin" />
-                        <SocialLink href="https://github.com/bk-007" icon="fa-github" label="GitHub" hoverColor="github" />
-                    </div>
-                </div>
-                <footer className="absolute bottom-0 w-full text-center py-4 text-sm bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm">
-                    Made by Bryce and Robots ❤️
-                </footer>
-            </div>
+        return e('section', { className: 'product-section' },
+            e('div', { className: 'container mx-auto px-4' },
+                e('div', { className: 'flex flex-col md:flex-row items-center justify-between' },
+                    e('div', { className: 'md:w-1/2', 'data-aos': 'fade-right' },
+                        e('h2', { className: 'text-4xl md:text-6xl font-bold mb-4' }, title),
+                        e('p', { className: 'text-xl md:text-2xl mb-8' }, description),
+                        e('a', { href: link, target: '_blank', rel: 'noopener noreferrer', className: 'bg-blue-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 transition duration-300' }, 'Connect')
+                    ),
+                    e('div', { className: 'md:w-1/2 mt-8 md:mt-0', 'data-aos': 'fade-left' },
+                        e('div', { id: `lottie-${title}`, className: 'lottie-container mx-auto' })
+                    )
+                )
+            )
         );
-    };
+    }
 
-    ReactDOM.render(<App />, document.getElementById('root'));
-</script>
-<script src="https://kit.fontawesome.com/8470afc509.js" crossorigin="anonymous"></script>
-</body>
+    function App() {
+        React.useEffect(() => {
+            AOS.init({
+                duration: 1000,
+                once: true,
+            });
+        }, []);
+
+        return e('div', null,
+            e('section', { className: 'hero-section h-screen flex items-center justify-center text-center' },
+                e('div', null,
+                    e('h1', { className: 'text-5xl md:text-7xl font-bold mb-6', 'data-aos': 'fade-down' }, 'Bryce Koning'),
+                    e('p', { className: 'text-xl md:text-2xl mb-8', 'data-aos': 'fade-up' }, 'Connect with me below!'),
+                    e('a', { href: '#instagram', className: 'text-blue-500 text-lg' }, 'Scroll to explore')
+                )
+            ),
+            e(ProductSection, {
+                title: 'Instagram',
+                description: 'Share your moments visually',
+                lottieData: "https://lottie.host/aebc35ae-3243-4676-a2f0-df00266d8574/0Gn3wGCVzm.json",// Instagram-like Lottie animation data
+                link: 'https://instagram.com',
+            }),
+            e(ProductSection, {
+                title: 'Threads',
+                description: 'Join the conversation',
+                lottieData: "https://lottie.host/df19d37f-1959-4fa8-9383-64b1f4ae2982/BdNTPviZSS.json", // Threads-like Lottie animation data
+                link: 'https://threads.net',
+            }),
+            e(ProductSection, {
+                title: 'LinkedIn',
+                description: 'Build your professional network',
+                lottieData: "https://lottie.host/1b767a78-9691-436f-97c2-b8d02803c9a7/YyEkyahNOO.json", // LinkedIn-like Lottie animation data
+                link: 'https://linkedin.com',
+            }),
+            e(ProductSection, {
+                title: 'GitHub',
+                description: 'Collaborate on code',
+                lottieData:"https://lottie.host/5d9bf881-189d-4244-a12d-e0c4fb093c40/qD0UfQPqPf.json",// GitHub-like Lottie animation data
+                link: 'https://github.com',
+            }),
+            e('footer', { className: 'text-center py-8' },
+                e('p', null, 'Designed with simplicity in mind')
+            )
+        );
+    }
+
+        ReactDOM.render(e(App)), 
+        document.getElementById('root');
+        </script>
+        </body>
 </html>
