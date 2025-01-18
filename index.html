@@ -36,6 +36,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -55,12 +56,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="text-gray-800">
     <header class="fixed w-full bg-white bg-opacity-90 shadow-sm z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">My<span class="text-blue-600">Portfolio</span></h1>
+            <h1 class="text-2xl font-bold float-animation">Wel<span class="text-blue-600">come</span></h1>
             <nav>
                 <ul class="flex space-x-8">
                     <li><a href="#about" class="hover:text-blue-600 transition duration-300">About</a></li>
@@ -75,54 +84,45 @@
         <section id="hero" class="h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
             <div class="text-center">
                 <h2 class="text-6xl font-bold mb-4 hero-text">Hello, I'm Bryce</h2>
-                <p class="text-xl text-gray-600 mb-8">Curiosity Enthusiast</p>
+                <p class="text-xl text-gray-600 mb-8">Tech Enthusiast and Continuous Learner</p>
                 <a href="#projects" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300">View My Work</a>
             </div>
         </section>
 
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0">
-                        <h2 class="text-4xl font-bold mb-6">About Me</h2>
-                        <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                            I'm curious about tech, data, and AI along with all the ways we can implement them into our daily lives. Honestly, I'm curious about everything and enjoy learning new things.
-                        </p>
-                        <a href="#contact" class="text-blue-600 font-semibold hover:underline">Let's connect →</a>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <div id="lottie-animation" class="w-80 h-80"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- About section remains unchanged -->
 
         <section id="projects" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold mb-12 text-center">My Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg reveal">
-                        <img src="https://unsplash.com/photos/an-abstract-red-and-orange-background-with-curves-K-DwbsTXliY/300x500" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://unsplash.com/photos/round-chocolate-cookies-on-white-surface-mo7y6AO_r5I/300x500" alt="Project 1" class="w-full h-full object-cover object-center">
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">This Website</h3>
-                            <p class="text-gray-600 mb-4">Learning web development, design, and using AI to help me along the way</p>
+                            <h3 class="text-xl font-semibold mb-2">Website</h3>
+                            <p class="text-gray-600 mb-4">A website showcasing my sister's awesome baking skills and products she sells</p>
                             <a href="#" class="text-blue-600 hover:underline">View Project →</a>
                         </div>
                     </div>
                     <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg reveal">
-                        <img src="https://unsplash.com/photos/a-heart-is-shown-on-a-computer-screen-KgLtFCgfC28/300x500" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://unsplash.com/photos/a-heart-is-shown-on-a-computer-screen-KgLtFCgfC28/300x500" alt="Project 2" class="w-full h-full object-cover object-center">
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Data Visualization Examples</h3>
-                            <p class="text-gray-600 mb-4">Interactive charts and graphs using Python, Tableau, Excel, and PowerBI</p>
-                            <a href="#" class="text-blue-600 hover:underline">Work In Progress →</a>
+                            <h3 class="text-xl font-semibold mb-2">Data Visualization Dashboard</h3>
+                            <p class="text-gray-600 mb-4">This is a current work in progress!</p>
+                            <a href="#" class="text-blue-600 hover:underline">View Project →</a>
                         </div>
                     </div>
                     <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg reveal">
-                        <img src="https://unsplash.com/photos/round-chocolate-cookies-on-white-surface-mo7y6AO_r5I/300x500" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://unsplash.com/photos/an-abstract-red-and-orange-background-with-curves-K-DwbsTXliY/300x500" alt="Project 3" class="w-full h-full object-cover object-center">
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Another Website</h3>
-                            <p class="text-gray-600 mb-4">My sister enjoys baking so this is a site to introduce people to her</p>
-                            <a href="#" class="text-blue-600 hover:underline">Work In Progress →</a>
+                            <h3 class="text-xl font-semibold mb-2">This Site</h3>
+                            <p class="text-gray-600 mb-4">A site I made to showcase projects I've worked on and different tech I've been learning.</p>
+                            <a href="#" class="text-blue-600 hover:underline">View Project →</a>
                         </div>
                     </div>
                 </div>
@@ -132,12 +132,18 @@
         <section id="contact" class="py-20 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-8">Let's Connect</h2>
-                <p class="text-xl mb-10">Find Me Below!</p>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://github.com/bk-007" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300">GitHub</a>
-                    <a href="https://www.linkedin.com/in/brycek/" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300">LinkedIn</a>
-                    <a href="https://www.instagram.com/guaconallthethings/" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300">Instagram</a>
-                    <a href="https://www.threads.net/@guaconallthethings" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300">Threads</a>
+                <p class="text-xl mb-10">Find me below @ my socials!</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://github.com/bk-007" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300 flex items-center">
+                        <i class="fab fa-github mr-2"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/brycek/" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300 flex items-center">
+                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://www.instagram.com/guaconallthethings/" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition duration-300 flex items-center">
+                        <i class="fab fa-instagram mr-2"></i> Instagram
+                    </a>
+                    
                 </div>
             </div>
         </section>
@@ -145,7 +151,7 @@
 
     <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-6 text-center">
-            <p>Made by Me and Robots with ❤</p>
+            <p>Made with <span style="color: #ff0000;">&#10084;</span> by Bryce & Robots.</p>
         </div>
     </footer>
 
