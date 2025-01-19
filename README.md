@@ -1,0 +1,1 @@
+This is a personal site to showcase different projects I have worked on along with different tech I have worked with. I am by no means a full-on dev but like to combine AI and Googlefu to learn and build something.
