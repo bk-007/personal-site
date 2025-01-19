@@ -13,7 +13,7 @@ This is a personal site to showcase different projects I have worked on along wi
 
 ## Projects
 Here are some of the projects I have worked on:
-1. **Raptor ranch Site**: [Raptor Ranch](https://www.instagram.com/raptor_ranch) A site to host my sister's business endeavors. 
+1. **Raptor ranch Site**: [Raptor Ranch](https://raptorranch.farm/) A site to host my sister's business endeavors. 
 2. **Data Viz Dashboard**: This is a current work in progress...so like not started yet.
 3. **Personal Site**: A personal site to host projects I've worked on.
 
