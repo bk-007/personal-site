@@ -12,11 +12,6 @@
     <!-- CDN Imports -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/88a2056623.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/GlitchPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
     <style>
         :root {
@@ -42,6 +37,28 @@
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: difference;
+        }
+
+        .cyber-border {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--primary), transparent 30%);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
 
         .social-link {
@@ -75,9 +92,6 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- WebGL Effects Container -->
-    <div id="webgl-effects" class="fixed inset-0 -z-20"></div>
-
     <!-- Custom Cursor Trail -->
     <canvas id="cursor-trail" class="cursor-trail"></canvas>
 
@@ -88,13 +102,24 @@
             <h1 class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent">
                 Digital Alchemist
             </h1>
-            <div class="rounded-2xl p-8 mb-8 backdrop-blur-lg bg-black/20">
+
+            <!-- About Section -->
+            <div class="cyber-border rounded-2xl p-8 mb-8 backdrop-blur-lg bg-black/20">
                 <p class="text-xl md:text-2xl opacity-80 mb-8">
-                    Currently casting spells with: 
+                    Hi, I'm Bryce - a creative developer passionate about building immersive digital experiences. 
+                    I specialize in blending cutting-edge web technologies with artistic design to create 
+                    memorable interactions.
+                </p>
+                <p class="text-xl md:text-2xl opacity-80">
+                    Currently focused on: 
                     <span class="text-[var(--primary)]">Three.js</span>, 
                     <span class="text-[var(--secondary)]">WebGL</span>, 
                     <span class="text-[var(--accent)]">GSAP</span>
                 </p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="cyber-border rounded-2xl p-8 backdrop-blur-lg bg-black/20">
                 <div class="flex gap-6 justify-center">
                     <a href="https://github.com/bk-007" target="_blank" class="social-link text-2xl p-4 rounded-full border-2 border-[var(--primary)]">
                         <i class="fab fa-github"></i>
@@ -109,63 +134,6 @@
             </div>
         </section>
     </main>
-
-    <!-- WebGL Effects Setup -->
-    <script>
-        // Initialize Three.js Scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            antialias: true, 
-            alpha: true,
-            powerPreference: "high-performance"
-        });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('webgl-effects').appendChild(renderer.domElement);
-
-        // Post-processing Effects
-        const composer = new THREE.EffectComposer(renderer);
-        composer.addPass(new THREE.RenderPass(scene, camera));
-
-        // Bloom Effect
-        const bloomPass = new THREE.UnrealBloomPass(
-            new THREE.Vector2(window.innerWidth, window.innerHeight),
-            1.5, // strength
-            0.4, // radius
-            0.85 // threshold
-        );
-        composer.addPass(bloomPass);
-
-        // Glitch Effect
-        const glitchPass = new THREE.GlitchPass();
-        glitchPass.goWild = false;
-        glitchPass.enabled = false; // Start disabled
-        composer.addPass(glitchPass);
-
-        // Animation Loop
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // Randomly enable glitch effect
-            if (Math.random() > 0.95) {
-                glitchPass.enabled = true;
-                setTimeout(() => glitchPass.enabled = false, 100);
-            }
-            
-            composer.render();
-        }
-        animate();
-
-        // Handle Window Resize
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-            composer.setSize(width, height);
-        });
-    </script>
 
     <!-- Custom Cursor Trail -->
     <script>
