@@ -6,234 +6,152 @@
     <title>Bryce | Creative Developer</title>
     <meta name="description" content="Building immersive digital experiences at the intersection of art and technology">
 
-    <!-- Open Graph / Social Sharing Meta -->
-    <meta property="og:title" content="Bryce | Creative">
-    <meta property="og:description" content="Building immersive digital experiences at the intersection of art and technology">
+    <!-- Open Graph Meta (Update these URLs) -->
     <meta property="og:image" content="https://example.com/social-preview.jpg">
     <meta property="og:url" content="https://brycek.me">
-    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Favicon and Manifest -->
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
+    <!-- Favicon (Ensure files exist in /images directory) -->
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
 
-    <!-- CDN Imports -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@splinetool/viewer@1.0.62/build/spline-viewer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.0/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/GlitchPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/shaders/CopyShader.js"></script>
-
+    <!-- Critical CSS -->
     <style>
         :root {
-            --primary: hsl(258, 90%, 66%);
-            --secondary: hsl(190, 90%, 60%);
-            --accent: hsl(345, 90%, 65%);
-        }
-
-        * {
-            font-family: 'Space Grotesk', sans-serif;
-            cursor: none !important;
+            --primary: #6D28D9;
+            --secondary: #0EA5E9;
+            --accent: #EF4444;
         }
 
         body {
-            background: radial-gradient(circle at 50% 50%, hsl(240, 50%, 8%), hsl(240, 50%, 4%));
-            color: hsl(0, 0%, 95%);
+            background: #0F172A;
+            color: white;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
+        /* Social Icons Fix */
+        .social-link i {
+            color: white !important; /* Force white color */
+            font-size: 1.5rem;
+        }
+
+        /* Cursor Fix */
         .cursor-trail {
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
         }
 
-        .social-link {
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .social-link:hover::before {
-            left: 100%;
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px);
+        /* Spline Viewer Fallback */
+        spline-viewer {
+            background: #1E293B; /* Fallback color */
+            position: fixed;
+            inset: 0;
+            z-index: -1;
         }
     </style>
+
+    <!-- External Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (Social Icons) -->
+    <script src="https://kit.fontawesome.com/88a2056623.js" crossorigin="anonymous"></script>
+    <!-- Spline Viewer (3D Background) -->
+    <script src="https://unpkg.com/@splinetool/viewer@1.0.62/build/spline-viewer.js"></script>
 </head>
 <body class="antialiased">
-    <!-- Custom Cursor Trail -->
+    <!-- Custom Cursor -->
     <canvas id="cursor-trail" class="cursor-trail"></canvas>
 
-    <!-- 3D Spline Background -->
+    <!-- Simplified 3D Background -->
     <spline-viewer 
-        url="https://prod.spline.design/Br2ec3WByC7U8Jh7/scene.splinecode"
-        class="fixed inset-0 -z-10 opacity-30"
+        url="https://prod.spline.design/6Wq1Q7YGyM2FhvKD/scene.splinecode"
+        loading-anim
+        class="opacity-50"
     ></spline-viewer>
 
-    <!-- WebGL Effects Container -->
-    <div id="webgl-effects" class="fixed inset-0 -z-20"></div>
-
     <!-- Main Content -->
-    <main class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Spotify Now Playing -->
-        <div class="fixed top-4 right-4 bg-black/30 p-4 rounded-2xl backdrop-blur-lg">
-            <iframe src="https://spotern.com/embed/now-playing/small/dark/" 
-                    style="border:0; width: 300px; height: 80px;" 
-                    allowtransparency="true"></iframe>
+    <main class="relative z-10 container mx-auto px-4 py-20 text-center">
+        <!-- Spotify Widget (Simplified) -->
+        <div class="fixed top-4 right-4 bg-black/30 p-3 rounded-lg backdrop-blur-lg">
+            <iframe 
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
+                width="300" 
+                height="80" 
+                frameborder="0" 
+                allowtransparency="true"
+                allow="encrypted-media"
+            ></iframe>
         </div>
 
-        <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center py-20">
-            <h1 class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent">
-                Digital Alchemist
-            </h1>
-            <div class="rounded-2xl p-8 mb-8 backdrop-blur-lg bg-black/20">
-                <p class="text-xl md:text-2xl opacity-80 mb-8">
-                    Currently casting spells with: 
-                    <span class="text-[var(--primary)]">Three.js</span>, 
-                    <span class="text-[var(--secondary)]">WebGL</span>, 
-                    <span class="text-[var(--accent)]">GSAP</span>
-                </p>
-                <div class="flex gap-6">
-                    <a href="https://github.com/bk-007" target="_blank" class="social-link text-2xl p-4 rounded-full border-2 border-[var(--primary)]">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/brycek/" target="_blank" class="social-link text-2xl p-4 rounded-full border-2 border-[var(--secondary)]">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://www.instagram.com/guaconallthethings/" target="_blank" class="social-link text-2xl p-4 rounded-full border-2 border-[var(--accent)]">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
+        <!-- Social Links -->
+        <div class="mt-12 flex justify-center gap-6">
+            <a href="https://github.com/bk-007" target="_blank" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/brycek/" target="_blank" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/guaconallthethings/" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
     </main>
 
-    <!-- WebGL Effects Setup -->
+    <!-- Simplified Cursor Trail -->
     <script>
-        // Initialize Three.js Scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('webgl-effects').appendChild(renderer.domElement);
-
-        // Post-processing Effects
-        const composer = new THREE.EffectComposer(renderer);
-        composer.addPass(new THREE.RenderPass(scene, camera));
-
-        const bloomPass = new THREE.UnrealBloomPass();
-        bloomPass.strength = 0.5;
-        bloomPass.radius = 1;
-        bloomPass.threshold = 0.6;
-        composer.addPass(bloomPass);
-
-        const glitchPass = new THREE.GlitchPass();
-        glitchPass.goWild = false;
-        composer.addPass(glitchPass);
-
-        // Animation Loop
-        function animate() {
-            requestAnimationFrame(animate);
-            composer.render();
-        }
-        animate();
-    </script>
-
-    <!-- Custom Cursor Trail -->
-    <script>
+        // Basic Cursor Trail
         const canvas = document.getElementById('cursor-trail');
         const ctx = canvas.getContext('2d');
-        let mouse = { x: -100, y: -100 };
-        let particles = [];
-
-        // Canvas Setup
-        function initCanvas() {
+        
+        function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        initCanvas();
-        window.addEventListener('resize', initCanvas);
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        // Particle Class
+        let particles = [];
+        
         class Particle {
-            constructor() {
-                this.pos = { x: mouse.x, y: mouse.y };
-                this.vel = { x: 0, y: 0 };
-                this.size = Math.random() * 3 + 1;
-                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2 + 1;
+                this.alpha = 1;
             }
-            
-            update() {
-                this.pos.x += this.vel.x;
-                this.pos.y += this.vel.y;
-                this.size *= 0.95;
-            }
-            
+
             draw() {
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
                 ctx.beginPath();
-                ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
+            }
+
+            update() {
+                this.alpha -= 0.05;
+                return this.alpha > 0;
             }
         }
 
-        // Animation Loop
-        function draw() {
+        function animate() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            particles.forEach((particle, i) => {
-                particle.update();
+            particles = particles.filter(particle => {
                 particle.draw();
-                if (particle.size < 0.5) particles.splice(i, 1);
+                return particle.update();
             });
             
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
-        draw();
 
-        // Mouse Move Handler
-        window.addEventListener('mousemove', e => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+        window.addEventListener('mousemove', (e) => {
             for(let i = 0; i < 3; i++) {
-                particles.push(new Particle());
+                particles.push(new Particle(e.clientX, e.clientY));
             }
         });
-    </script>
 
-    <!-- Smooth Scroll -->
-    <script>
-        const lenis = new Lenis()
-        function raf(time) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
+        animate();
     </script>
 </body>
 </html>
