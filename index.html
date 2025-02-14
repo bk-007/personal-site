@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryce | Creative Developer</title>
+    <meta name="description" content="Building immersive digital experiences at the intersection of art and technology">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+
+    <!-- CDN Imports -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/88a2056623.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        :root {
+            --primary: hsl(258, 90%, 66%);
+            --secondary: hsl(190, 90%, 60%);
+            --accent: hsl(345, 90%, 65%);
+        }
+
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: #0F172A;
+            color: hsl(0, 0%, 95%);
+            overflow-x: hidden;
+        }
+
+        .glow-bars {
+            position: fixed;
+            width: 200vw;
+            height: 100vh;
+            transform: rotate(-15deg);
+            z-index: -1;
+        }
+
+        .bar {
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            filter: blur(30px);
+            transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .primary { 
+            background: var(--primary);
+            left: -10%;
+            animation: glow-pulse 3s infinite alternate;
+        }
+
+        .secondary {
+            background: var(--secondary);
+            left: 35%;
+            animation: glow-pulse 3s 0.5s infinite alternate;
+        }
+
+        .accent {
+            background: var(--accent);
+            left: 70%;
+            animation: glow-pulse 3s 1s infinite alternate;
+        }
+
+        @keyframes glow-pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .reveal-heading {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s infinite;
+            color: var(--primary);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Hero Section -->
+    <section class="scroll-section">
+        <div class="glow-bars">
+            <div class="bar primary"></div>
+            <div class="bar secondary"></div>
+            <div class="bar accent"></div>
+        </div>
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent reveal-heading">
+                Hello I'm Bryce
+            </h1>
+            <div class="scroll-indicator text-3xl">↓</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="scroll-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-[var(--secondary)] to-[var(--accent)] bg-clip-text text-transparent">
+                About Me
+            </h2>
+            <p class="text-xl md:text-2xl opacity-90 max-w-2xl mb-12">
+                Creative developer building immersive digital experiences with modern web technologies.
+            </p>
+            <div class="scroll-indicator text-3xl">↓</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="scroll-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-12 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent">
+                Projects
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <!-- Project Cards -->
+                <div class="project-card p-6 animate__animated">
+                    <div class="text-[var(--primary)] mb-4 text-2xl">🔮</div>
+                    <h3 class="text-xl font-bold mb-2">Interactive Portfolio</h3>
+                    <p class="opacity-80">Three.js powered 3D experience showcasing design work</p>
+                </div>
+                
+                <div class="project-card p-6 animate__animated">
+                    <div class="text-[var(--secondary)] mb-4 text-2xl">🤖</div>
+                    <h3 class="text-xl font-bold mb-2">AI Art Generator</h3>
+                    <p class="opacity-80">ML-powered creative tool for generating digital artwork</p>
+                </div>
+
+                <div class="project-card p-6 animate__animated">
+                    <div class="text-[var(--accent)] mb-4 text-2xl">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">WebGL Experiments</h3>
+                    <p class="opacity-80">Collection of interactive browser-based animations</p>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex gap-4 justify-start">
+                <a href="https://github.com/bk-007" target="_blank" class="social-link p-4 rounded-full bg-[var(--primary)]/10">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/brycek/" target="_blank" class="social-link p-4 rounded-full bg-[var(--secondary)]/10">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://www.instagram.com/guaconallthethings/" target="_blank" class="social-link p-4 rounded-full bg-[var(--accent)]/10">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GSAP Scroll Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Glow Bars Animation
+        gsap.to(".bar", {
+            scrollTrigger: {
+                trigger: ".scroll-section",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+            },
+            x: (i) => (i === 0 ? "-100%" : i === 1 ? "100%" : "-150%"),
+            rotate: "0deg",
+            duration: 2,
+        });
+
+        // Text Reveal Animation for "Hello I'm Bryce"
+        gsap.to(".reveal-heading", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".scroll-section",
+                start: "top center",
+                end: "bottom center",
+                toggleActions: "play none none none",
+            },
+        });
+
+        // Project Card Animations
+        gsap.utils.toArray(".project-card").forEach((card, index) => {
+            gsap.from(card, {
+                opacity: 0,
+                y: 50,
+                duration: 0.5,
+                delay: index * 0.2,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none none",
+                },
+            });
+        });
+    </script>
+</body>
+</html>
