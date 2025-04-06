@@ -1,7 +1,7 @@
 # Bryce Studios Portfolio 
 
 <div align="left">
-  <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1743902724/brycestudioslogo_u38zpm.svg" alt="Bryce Studios Logo" width="200">
+  <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1743902724/brycestudioslogogif_iwlkgw.gif" alt="Bryce Studios Logo" width="200">
   
   [![Live Site](https://img.shields.io/badge/🌐_Live_Site-1DA1F2?style=for-the-badge)](https://your-portfolio-url.com)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
