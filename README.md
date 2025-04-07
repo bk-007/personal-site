@@ -3,7 +3,7 @@
 <div align="left">
   <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1743902724/brycestudioslogogif_iwlkgw.gif" alt="Bryce Studios Logo" width="200">
   
-  [![Live Site](https://img.shields.io/badge/🌐_Live_Site-1DA1F2?style=for-the-badge)](https://your-portfolio-url.com)
+  [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://brycek.me)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
   [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourprofile)
 
