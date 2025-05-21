@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryce Studios</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688253455/IMG_0453_3__adobe_express_wrdltu.svg" as="image">
+    <link rel="preload" href="https://res.cloudinary.com/dlo6pjmqi/video/upload/v1743901097/raptor_ranch_rjy4u8.gif" as="image">
+    
+    <!-- Font Awesome for simplified social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Critical CSS - Minimal styles needed for above-the-fold content */
+        :root {
+            --primary: #1DA1F2;
+            --secondary: #FF6B6B;
+            --background: #f8f9fa;
+            --text: #1a1a1a;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #1a1a1a;
+                --text: #f8f9fa;
+                --card-bg: #2d2d2d;
+                --header-bg: rgba(26, 26, 26, 0.95);
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            padding-top: 60px;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 1rem 20px;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .hero-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            z-index: -2;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        /* Mobile menu button - initially hidden */
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        /* Project cards with Pokémon-style flip effect */
+        .project-card {
+            perspective: 1000px;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+        
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover .project-card-inner {
+            transform: rotateY(15deg);
+        }
+        
+        .project-card-front, 
+        .project-card-back {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        .project-card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        
+        .project-media-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+            background: var(--card-bg);
+        }
+        
+        .project-card h3 {
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 80%;
+        }
+        
+        .project-links a {
+            padding: 0.75rem 1rem;
+            border-radius: 25px;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .project-links a:hover {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.05);
+        }
+        
+        /* Skills grid - 2 columns */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-item {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow);
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-level-container {
+            height: 6px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: width 1.5s ease-in-out;
+            width: 0;
+        }
+        
+        /* Social icons */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px var(--shadow);
+            color: var(--text);
+            font-size: 1.5rem;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.1);
+            color: var(--primary);
+            box-shadow: 0 6px 12px var(--shadow);
+        }
+        
+        /* Button styles */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .button:hover {
+            transform: scale(1.05);
+            background: var(--secondary);
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        section h2:hover::after {
+            width: 100%;
+        }
+        
+        /* Project grid layout */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--header-bg);
+            color: var(--text);
+            text-align: center;
+            padding: 1.5rem 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px var(--shadow);
+            margin-top: 3rem;
+        }
+        
+        .heart {
+            color: var(--secondary);
+            display: inline-block;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                height: 85vh;
+            }
+            
+            .project-grid, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card:hover .project-card-inner {
+                transform: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            section {
+                padding: 3rem 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Bryce</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688253455/IMG_0453_3__adobe_express_wrdltu.svg" 
+                 alt="Profile Photo" 
+                 class="profile-pic" 
+                 width="150" 
+                 height="150" 
+                 loading="eager">
+            <h1>Creating unique solutions to everyday problems</h1>
+            <p>Hobbyist with a passion for turning data into insights and beautiful experiences</p>
+            <a href="#projects" class="button">View My Work</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>With a background in operations and quality management, I transform complex data into actionable insights. I've streamlined manufacturing processes and developed custom tracking systems. Beyond my professional work, I design and build websites for small businesses and maintain my own portfolio site, combining my analytical mindset with creative design skills to deliver solutions that are both functional and visually compelling.</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <div class="project-media-container">
+                            <img src="https://res.cloudinary.com/dlo6pjmqi/video/upload/v1743901097/raptor_ranch_rjy4u8.gif" 
+                                 alt="Small Business Branding and Website Project" 
+                                 class="project-image" 
+                                 loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <h3>Small Business Branding and Website</h3>
+                            <p>Complete website and logo design for a local small business.</p>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <div class="project-links">
+                            <a href="https://raptorranch.farm/">View Live Site</a>
+                            <a href="#">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <div class="project-media-container">
+                            <lottie-player class="project-lottie" 
+                                          src="https://lottie.host/ecd672a5-9981-46f7-bd98-2d5ca50d6938/g8c6PtkoYW.json" 
+                                          background="transparent" 
+                                          speed="1" 
+                                          loop 
+                                          autoplay
+                                          width="100%"
+                                          height="100%"></lottie-player>
+                        </div>
+                        <div class="project-content">
+                            <h3>Portfolio Site for Myself</h3>
+                            <p>Created this site from scratch and with some help from robots.</p>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <div class="project-links">
+                            <a href="#">View Code</a>
+                            <a href="#">Design Process</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills & Tools</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">Excel</div>
+                <p>Advanced data analysis and visualization</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Python</div>
+                <p>Data processing and automation scripts</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 30%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">SQL</div>
+                <p>Database queries and management</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 20%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Tableau/Power BI</div>
+                <p>Interactive dashboards and reporting</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 50%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Lean Methodologies</div>
+                <p>Process optimization techniques</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Project Management</div>
+                <p>Planning and execution coordination</p>
+                <div class="skill-level-container">
+                    <div class="skill-level" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <p>Let's connect below!</p>
+        <div class="social-links">
+            <a href="https://instagram.com/guaconallthethings" class="social-link" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/brycek" class="social-link" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/bk-007" class="social-link" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100083584007550" class="social-link" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with <span class="heart">♥</span> by Bryce Studios</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Animate skill levels when section comes into view
+            const skillsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.skill-level').forEach(skill => {
+                            skill.style.width = skill.style.width;
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const skillsSection = document.querySelector('#skills');
+            if (skillsSection) skillsObserver.observe(skillsSection);
+            
+            // Load Lottie player when needed
+            const lottieObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const script = document.createElement('script');
+                        script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js';
+                        document.body.appendChild(script);
+                        lottieObserver.disconnect();
+                    }
+                });
+            });
+            
+            const lottiePlayer = document.querySelector('.project-lottie');
+            if (lottiePlayer) lottieObserver.observe(lottiePlayer);
+        });
+    </script>
+</body>
+</html>
