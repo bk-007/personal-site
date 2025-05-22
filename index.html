@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryce Studios</title>
+    <style>
+        :root {
+            --primary-red: #E44223;
+            --pure-white: #FFFFFF;
+            --deep-black: #0E0E0E;
+            --medium-gray: #9A9998;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--deep-black);
+            background: var(--pure-white);
+        }
+        
+        .header {
+            background: var(--pure-white);
+            padding: 1.5rem 5%;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(14, 14, 14, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--deep-black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--deep-black);
+        }
+        
+        .hero {
+            padding: 4rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            justify-self: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+        }
+        
+        .hero-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-tag {
+            background: var(--primary-red);
+            color: var(--pure-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-red);
+            color: var(--pure-white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(228, 66, 35, 0.3);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--deep-black);
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--medium-gray);
+            border-top: 1px solid var(--medium-gray);
+            margin-top: 4rem;
+        }
+        
+        .heart {
+            color: var(--primary-red);
+            display: inline-block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 2rem;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                right: 0;
+                background: var(--pure-white);
+                padding: 2rem 5%;
+                flex-direction: column;
+                gap: 1.5rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                font-size: 1.2rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-image {
+                max-width: 250px;
+            }
+            
+            #expertise {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="/">
+                <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1743902724/brycestudioslogo_u38zpm.svg" alt="Bryce Studios Logo" class="logo">
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Main Hero/About Section -->
+    <main class="hero" id="about">
+        <div class="hero-image-container">
+            <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1688253455/IMG_0453_3__adobe_express_wrdltu.svg" alt="Bryce K" class="hero-image">
+        </div>
+        
+        <div class="hero-content">
+            <h1>Bryce</h1>
+            
+            <p>With a background in operations and quality management, I bridge the gap between analytical precision and creative vision.</p>
+            
+            <div id="expertise">
+                <h2>Core Expertise</h2>
+                <p>I specialize in creating solutions that combine:</p>
+                <ul>
+                    <li>AI-enhanced design systems</li>
+                    <li>Data visualization that tells compelling stories</li>
+                    <li>Experience design informed by behavioral analytics</li>
+                    <li>Process optimization through intelligent automation</li>
+                </ul>
+                
+                <div class="skills">
+                    <span class="skill-tag">AI Integration</span>
+                    <span class="skill-tag">Data Visualization</span>
+                    <span class="skill-tag">UX/UI Design</span>
+                    <span class="skill-tag">Process Automation</span>
+                    <span class="skill-tag">Lean Methodologies</span>
+                    <span class="skill-tag">Continuous Improvement</span>
+                </div>
+            </div>
+            
+            <div id="contact">
+                <h2>Let's Connect</h2>
+                <!-- <p>Interested in how data-driven design can transform your business? Reach out to discuss your project.</p> -->
+                <a href="mailto:hello@brycek.me" class="cta-button">Email Me!</a>
+                
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/brycek" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/bk-007" aria-label="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/guaconallthethings" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Made with <span class="heart">♥</span> by Bryce & Robots</p>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileBtn && navLinks) {
+                mobileBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navLinks && navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // Heart animation
+            const heart = document.querySelector('.heart');
+            if (heart) {
+                heart.addEventListener('click', function() {
+                    heart.style.transform = 'scale(1.5)';
+                    setTimeout(function() {
+                        heart.style.transform = 'scale(1)';
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
