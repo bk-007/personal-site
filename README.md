@@ -1,10 +1,10 @@
-# Bryce's Link Page
+# My Link-in-bio Page
 
 This is my personal link page — a single-file HTML site with a little motion, color, and attitude.  
 No frameworks, no build tools, no nonsense. Just open it and it works.
 
 ## Preview
-👉 [View the site](https://brycekoning.github.io) *(or wherever you host it)*
+👉 [View the site](https://brycek.me)
 
 It’s a one-pager with:
 - My photo
