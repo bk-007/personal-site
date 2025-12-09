@@ -1,0 +1,45 @@
+# Block OpenAI's primary training crawler
+User-agent: GPTBot
+Disallow: /
+
+# Block Anthropic's primary training crawler
+User-agent: anthropic-ai
+Disallow: /
+
+# Block other Anthropic AI-related crawlers
+User-agent: Claude-Web
+Disallow: /
+User-agent: Claudebot
+Disallow: /
+
+# Block Google's token for controlling Gemini AI training access
+# NOTE: This does not affect Googlebot for standard Google Search indexing
+User-agent: Google-Extended
+Disallow: /
+
+# Block other common AI-related crawlers
+
+# Common Crawl (CCBot)
+User-agent: CCBot
+Disallow: /
+
+# OpenAI's user-triggered fetcher
+User-agent: ChatGPT-User
+Disallow: /
+
+# Perplexity AI's primary indexer
+User-agent: PerplexityBot
+Disallow: /
+
+# General rule for all other compliant bots (optional, but often used)
+User-agent: *
+Allow: /
+
+# Specific search engine crawlers that you generally want to allow
+# Google's main search indexer
+User-agent: Googlebot
+Allow: /
+
+# Microsoft's main search indexer (for Bing/Copilot)
+User-agent: Bingbot
+Allow: /
