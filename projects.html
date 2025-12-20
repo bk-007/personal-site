@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Projects · Bryce Koning</title>
+<meta name="theme-color" content="#050608" />
+
+<style>
+  :root {
+    --bg: #050608;
+    --ink: #f0f4f8;
+    --muted: #8b9bb4;
+    --border: rgba(255, 255, 255, 0.1);
+
+    --hi1: #6c5cff;
+    --hi2: #00d2ff;
+
+    --br: 24px;
+    --ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(108, 92, 255, 0.18), transparent 55%),
+      radial-gradient(circle at 50% 100%, rgba(0, 210, 255, 0.12), transparent 60%),
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      100% 100%,
+      40px 40px,
+      40px 40px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    animation: breathe 18s ease infinite;
+  }
+
+  @keyframes breathe {
+    0% { background-position: 50% 0%, 50% 100%, 0 0, 0 0; }
+    50% { background-position: 50% 8%, 50% 92%, 0 0, 0 0; }
+    100% { background-position: 50% 0%, 50% 100%, 0 0, 0 0; }
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    width: min(560px, 100%);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slide-in 0.8s var(--ease) forwards;
+  }
+
+  @keyframes slide-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel {
+    border-radius: var(--br);
+    padding: 32px 24px;
+    background: rgba(20, 25, 35, 0.6);
+    backdrop-filter: blur(30px) saturate(160%);
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    width: fit-content;
+  }
+
+  .back:hover {
+    color: var(--ink);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .projects {
+    display: grid;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .project {
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .project h2 {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .project p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  .stack {
+    margin-top: 8px;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #aab6ff;
+  }
+
+  .footer {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  @media (min-width: 768px) {
+    .panel { padding: 40px 32px; }
+    h1 { font-size: 30px; }
+    .project h2 { font-size: 17px; }
+    .project p { font-size: 15px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <div class="panel">
+      <header>
+        <a class="back" href="index.html">← Home</a>
+        <h1>Projects</h1>
+        <p class="subtitle">Internal tools, automation, and systems I’ve built</p>
+      </header>
+
+      <section class="projects">
+
+        <div class="project">
+          <h2>SPC Database & Search Tool</h2>
+          <p>
+            Replaced fragile Excel macros with a centralized, searchable database
+            for quality data, inspection results, and test history.
+          </p>
+          <div class="stack">Python · SQLite · Streamlit</div>
+        </div>
+
+        <div class="project">
+          <h2>Drawing OCR & Revision Extractor</h2>
+          <p>
+            Automated extraction of part numbers, revisions, and key specs from
+            engineering PDFs to reduce manual entry errors.
+          </p>
+          <div class="stack">Python · OCR · OpenCV</div>
+        </div>
+
+        <div class="project">
+          <h2>QC Training Matrix & Progress Tracker</h2>
+          <p>
+            Built a structured training and competency tracking system to support
+            auditor leveling and ISO-aligned documentation.
+          </p>
+          <div class="stack">Excel · Forms · Process Design</div>
+        </div>
+
+        <div class="project">
+          <h2>Manufacturing Data Utilities</h2>
+          <p>
+            Small internal apps for file parsing, report generation, and data cleanup
+            used by operators without admin access.
+          </p>
+          <div class="stack">Python · GUI · Automation</div>
+        </div>
+
+      </section>
+
+      <p class="footer">Made in Arizona 🌵 by me and 🤖's · 2025</p>
+    </div>
+  </main>
+</body>
+</html>
