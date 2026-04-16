@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bryce Koning</title>
+<meta name="theme-color" content="#050608" />
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<style>
+  :root {
+    --bg: #050608;
+    --ink: #f0f4f8;
+    --muted: #8b9bb4;
+    --border: rgba(255, 255, 255, 0.1);
+
+    --hi1: #6c5cff;
+    --hi2: #00d2ff;
+
+    --br: 24px;
+    --ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    color: var(--ink);
+    background-color: var(--bg); /* Solid base color only */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+
+  /* Dynamic Weather Background Styles */
+  #weather-bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    opacity: 0.6; /* Increased slightly since it's the only background now */
+    filter: blur(12px); /* Softened slightly for better visibility */
+    pointer-events: none;
+    transform: scale(1.1); /* Prevents the blur from shrinking away from the screen edges */
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    width: min(460px, 100%);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slide-in 0.8s var(--ease) forwards;
+  }
+
+  @keyframes slide-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel {
+    border-radius: var(--br);
+    padding: 32px 24px;
+    background: rgba(20, 25, 35, 0.6);
+    backdrop-filter: blur(30px) saturate(160%);
+    -webkit-backdrop-filter: blur(30px) saturate(160%);
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--hi1), var(--hi2));
+    box-shadow: 0 12px 36px -12px rgba(108, 92, 255, 0.55);
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--bg);
+    background: var(--bg);
+    display: block;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .bio {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  nav {
+    display: grid;
+    gap: 12px;
+  }
+
+  a.card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s var(--ease), background 0.2s, border-color 0.2s;
+  }
+
+  a.card:active {
+    transform: scale(0.96);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (hover: hover) {
+    a.card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+  }
+
+  a.card.primary {
+    background: linear-gradient(
+      135deg,
+      rgba(108, 92, 255, 0.15),
+      rgba(0, 210, 255, 0.15)
+    );
+    border-color: rgba(108, 92, 255, 0.35);
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+
+  .icon.ig { background: rgba(225, 48, 108, 0.12); }
+  .icon.li { background: rgba(0, 119, 181, 0.12); }
+  .icon.gh { background: rgba(255, 255, 255, 0.12); }
+  .icon.pr { background: rgba(108, 92, 255, 0.15); }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .label {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .arrow {
+    margin-left: auto;
+    color: var(--muted);
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+  }
+
+  @media (hover: hover) and (min-width: 768px) {
+    a.card:hover .arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  .footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  @media (min-width: 768px) {
+    .wrap { width: min(560px, 100%); }
+    .panel { padding: 40px 32px; }
+    h1 { font-size: 28px; }
+    .bio { font-size: 16px; }
+    a.card { padding: 18px 24px; }
+    .icon { width: 44px; height: 44px; }
+    .label { font-size: 16px; }
+    .meta { font-size: 13px; }
+    .avatar { width: 140px; height: 140px; }
+  }
+</style>
+</head>
+
+<body>
+  <canvas id="weather-bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <div class="panel">
+      <header>
+        <div class="avatar">
+          <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1776302886/bday_profile_pic_te8dfn.jpg" alt="Bryce Koning" />
+        </div>
+        <div>
+          <h1>Bryce Koning</h1>
+          <p class="bio">Quality · Manufacturing · Automation</p>
+        </div>
+      </header>
+
+      <nav>
+        <a class="card primary" href="https://linkedin.com/in/brycek" target="_blank">
+          <span class="icon li">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 24px; height: 24px;" hover loop></lottie-player>
+          </span>
+          <div class="info">
+            <span class="label">LinkedIn</span>
+            <span class="meta">Professional background</span>
+          </div>
+          <span class="arrow">›</span>
+        </a>
+
+        <a class="card" href="https://www.instagram.com/brycekoning" target="_blank">
+          <span class="icon ig">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 24px; height: 24px;" hover loop></lottie-player>
+          </span>
+          <div class="info">
+            <span class="label">Instagram</span>
+            <span class="meta">Socials</span>
+          </div>
+          <span class="arrow">›</span>
+        </a>
+
+        <a class="card" href="https://github.com/bk-007" target="_blank">
+          <span class="icon gh">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 24px; height: 24px;" hover loop></lottie-player>
+          </span>
+          <div class="info">
+            <span class="label">GitHub</span>
+            <span class="meta">Code & tools</span>
+          </div>
+          <span class="arrow">›</span>
+        </a>
+
+        <a class="card" href="projects.html" aria-disabled="true">
+          <span class="icon pr">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 24px; height: 24px;" hover loop></lottie-player>
+          </span>
+          <div class="info">
+            <span class="label">Projects</span>
+            <span class="meta">Automation, SPC, internal tools</span>
+          </div>
+          <span class="arrow">›</span>
+        </a>
+      </nav>
+
+      <p class="footer">Made in Arizona 🌵 by me and 🤖's · 2026</p>
+    </div>
+  </main>
+
+  <script type="module">
+    import { DotLottie } from "https://esm.sh/@lottiefiles/dotlottie-web@0.65.0";
+
+    const defaultLat = 33.4484;
+    const defaultLon = -112.0740;
+    const canvas = document.getElementById('weather-bg-canvas');
+
+    const SRC = 'https://asset-cdn.lottiefiles.dev/63301659-027d-4e6b-a584-527f63ac3db0/KHmHv1kUBD.lottie';
+    const dotLottie = new DotLottie({
+      canvas,
+      src: SRC,
+      autoplay: true,
+      loop: true,
+      renderConfig: {
+        autoResize: true,
+        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+      }
+    });
+
+    const ICON = {
+      rain: 'icon-rain',
+      snowstorm: 'icon-snowstorm',
+      windy: 'icon-windy',
+      night: 'icon-night',
+      sunny: 'icon-sunny',
+      storm: 'icon-storm',
+      cloudy: 'icon-cloudy',
+      snow: 'icon-snow'
+    };
+
+    const ICON_IDS = Object.values(ICON);
+
+    const THEME_DEFAULT = {
+      rules: [
+        { id: 'gradient-1', type: 'Color', value: [0.1255, 0.1412, 0.1843] },
+        { id: 'gradient-2', type: 'Color', value: [0.251, 0.5882, 0.8588] },
+        { id: 'gradient-3', type: 'Color', value: [0.5804, 0.7529, 0.8118] },
+        { id: 'gradient-4', type: 'Color', value: [0.8353, 0.651, 0.302] },
+        { id: 'gradient-5', type: 'Color', value: [0.8941, 0.3098, 0.1294] }
+      ]
+    };
+    const THEME_RAIN = {
+      rules: [
+        { id: 'gradient-1', type: 'Color', value: [0.0039, 0.0039, 0.0039] },
+        { id: 'gradient-2', type: 'Color', value: [0.1608, 0.1882, 0.2863] },
+        { id: 'gradient-3', type: 'Color', value: [0.1961, 0.3176, 0.6902] },
+        { id: 'gradient-4', type: 'Color', value: [0.6353, 0.6549, 0.6392] },
+        { id: 'gradient-5', type: 'Color', value: [0.2431, 0.2078, 1] }
+      ]
+    };
+    const THEME_CLEAR = {
+      rules: [
+        { id: 'gradient-1', type: 'Color', value: [0.0941, 0.4549, 0.1765] },
+        { id: 'gradient-2', type: 'Color', value: [0.1216, 0.2471, 0.1922] },
+        { id: 'gradient-3', type: 'Color', value: [0.4157, 0.5961, 0.8118] },
+        { id: 'gradient-4', type: 'Color', value: [0.6392, 0.6471, 0.8745] },
+        { id: 'gradient-5', type: 'Color', value: [0.7373, 0, 1] }
+      ]
+    };
+    const THEME_SNOW = {
+      rules: [
+        { id: 'gradient-1', type: 'Color', value: [0.5765, 0.5176, 0.8549] },
+        { id: 'gradient-2', type: 'Color', value: [0.6392, 0.6471, 0.8745] },
+        { id: 'gradient-3', type: 'Color', value: [0.7176, 0.2275, 0.502] },
+        { id: 'gradient-4', type: 'Color', value: [1, 0.9529, 0.7176] },
+        { id: 'gradient-5', type: 'Color', value: [0.9059, 0.3529, 0.7451] }
+      ]
+    };
+
+    let currentIcon = null;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      if (typeof dotLottie.resize === 'function') dotLottie.resize();
+      if (typeof dotLottie.setRenderConfig === 'function') {
+        dotLottie.setRenderConfig({ devicePixelRatio: dpr, autoResize: true });
+      }
+    }
+
+    function applyIcons(iconId, force = false) {
+      if (!force && iconId === currentIcon) return;
+      currentIcon = iconId;
+      if (typeof dotLottie.setScalarSlot === 'function') {
+        for (const id of ICON_IDS) dotLottie.setScalarSlot(id, 0);
+        if (iconId) dotLottie.setScalarSlot(iconId, 100);
+        return;
+      }
+      if (typeof dotLottie.setSlots === 'function') {
+        const payload = {};
+        for (const id of ICON_IDS) payload[id] = { a: 0, k: 0 };
+        if (iconId) payload[iconId] = { a: 0, k: 100 };
+        dotLottie.setSlots(payload);
+      }
+    }
+
+    function iconFromCode(code, isDay) {
+      const c = Number(code);
+      if (!isDay && (c === 0 || c === 1)) return ICON.night;
+      if (c === 0 || c === 1) return ICON.sunny;
+      if (c === 2 || c === 3) return ICON.cloudy;
+      if (c === 45 || c === 48) return ICON.windy;
+      if ((c >= 51 && c <= 57) || (c >= 61 && c <= 67) || (c >= 80 && c <= 82)) return ICON.rain;
+      if (c >= 95 && c <= 99) return ICON.storm;
+      if (c >= 71 && c <= 77) return ICON.snow;
+      if (c === 85 || c === 86) return ICON.snowstorm;
+      return ICON.cloudy;
+    }
+
+    function themeFromCode(code) {
+      const c = Number(code);
+      if ((c >= 51 && c <= 67) || (c >= 80 && c <= 82) || (c >= 95 && c <= 99) || c === 45 || c === 48) return THEME_RAIN;
+      if ((c >= 71 && c <= 77) || c === 85 || c === 86) return THEME_SNOW;
+      if (c === 0 || c === 1) return THEME_CLEAR;
+      return THEME_DEFAULT;
+    }
+
+    function applyWeatherState(weatherCode, isDay) {
+      dotLottie.setThemeData(JSON.stringify(themeFromCode(weatherCode)));
+      applyIcons(iconFromCode(weatherCode, isDay), true);
+    }
+
+    async function applyLocalWeather(lat, lon) {
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&current=weather_code,is_day&timezone=auto`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Weather request failed: ${response.status}`);
+        const data = await response.json();
+        const weatherCode = data?.current?.weather_code ?? 0;
+        const isDay = Boolean(data?.current?.is_day ?? 1);
+        applyWeatherState(weatherCode, isDay);
+      } catch (error) {
+        console.error('Weather fetch failed, using Phoenix fallback motion token theme.', error);
+        applyWeatherState(0, true);
+      }
+    }
+
+    dotLottie.addEventListener('load', () => {
+      resizeCanvas();
+      applyWeatherState(0, true);
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => applyLocalWeather(position.coords.latitude, position.coords.longitude),
+          () => applyLocalWeather(defaultLat, defaultLon),
+          { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 }
+        );
+      } else {
+        applyLocalWeather(defaultLat, defaultLon);
+      }
+    });
+
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+  </script>
+</body>
+</html>
