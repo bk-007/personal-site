@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Bryce Koning leads teams, improves manufacturing operations, and builds practical quality and automation systems." />
+  <meta property="og:title" content="Bryce Koning · Operations, People & Systems" />
+  <meta property="og:description" content="I lead teams, improve processes, and build practical systems that make manufacturing work better." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://brycek.me/" />
+  <title>Bryce Koning · Operations, People & Systems</title>
+  <meta name="theme-color" content="#07090d" />
+  <style>
+    :root {
+      --bg: #07090d;
+      --panel: rgba(18, 23, 32, 0.72);
+      --panel-strong: rgba(23, 30, 42, 0.92);
+      --ink: #f2f6fb;
+      --muted: #9aa8bb;
+      --border: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --violet: #7c6cff;
+      --cyan: #20d6ff;
+      --green: #70e1a1;
+      --shadow: 0 32px 90px rgba(0, 0, 0, 0.42);
+      --radius: 26px;
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(124,108,255,.20), transparent 34rem),
+        radial-gradient(circle at 90% 20%, rgba(32,214,255,.12), transparent 30rem),
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, auto, 42px 42px, 42px 42px, auto;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    .noise {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 1; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 22px 0 12px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.03em; text-decoration: none; }
+    .toplinks { display: flex; gap: 18px; align-items: center; }
+    .toplinks a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .toplinks a:hover { color: var(--ink); }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(220px, .45fr);
+      gap: 28px;
+      align-items: center;
+      padding: 48px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: #c6d0dd; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; background: linear-gradient(90deg,var(--violet),var(--cyan)); }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .96;
+      letter-spacing: -.065em;
+      max-width: 900px;
+    }
+    h1 span {
+      display: block;
+      background: linear-gradient(110deg, #ffffff 18%, #b8c8db 48%, #7fe8ff 86%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .lede { max-width: 760px; margin: 28px 0 0; color: #b5c0cf; font-size: clamp(18px, 2.3vw, 24px); line-height: 1.45; }
+    .lede strong { color: var(--ink); font-weight: 700; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 48px; padding: 0 18px; border-radius: 15px;
+      border: 1px solid var(--border); text-decoration: none; font-weight: 700; font-size: 14px;
+      background: rgba(255,255,255,.045); transition: .2s var(--ease);
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--border-strong); background: rgba(255,255,255,.075); }
+    .button.primary { background: linear-gradient(135deg, rgba(124,108,255,.28), rgba(32,214,255,.18)); border-color: rgba(124,108,255,.45); }
+
+    .identity-card {
+      width: min(280px, 100%); justify-self: end;
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+      background: var(--panel); backdrop-filter: blur(24px) saturate(135%); box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
+    }
+    .avatar { width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; background: #10151d; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .identity-meta { padding: 14px 3px 2px; }
+    .identity-meta strong { display: block; font-size: 19px; letter-spacing: -.02em; }
+    .identity-meta span { color: var(--muted); font-size: 13px; }
+    .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 11px; color: #cbd5e1; font-size: 12px; }
+    .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 16px rgba(112,225,161,.9); }
+
+    section { padding: 54px 0; }
+    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 28px; align-items: start; margin-bottom: 28px; }
+    .kicker { color: var(--cyan); text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+    h2 { margin: 8px 0 0; font-size: clamp(32px, 5vw, 54px); letter-spacing: -.045em; line-height: 1.05; }
+    .section-copy { color: var(--muted); font-size: 18px; margin: 4px 0 0; max-width: 680px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      border: 1px solid var(--border); border-radius: 22px; padding: 24px;
+      background: rgba(15,20,29,.68); min-height: 220px; transition: .2s var(--ease);
+    }
+    .card:hover { transform: translateY(-3px); border-color: var(--border-strong); background: rgba(20,27,38,.82); }
+    .card-num { color: var(--violet); font: 700 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .card h3 { margin: 24px 0 10px; font-size: 21px; letter-spacing: -.025em; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .principle { border-top: 1px solid var(--border); padding: 22px 0; }
+    .principle strong { display: block; font-size: 19px; margin-bottom: 7px; }
+    .principle span { color: var(--muted); }
+
+    .cta {
+      margin: 44px 0 64px; padding: 36px;
+      border: 1px solid rgba(124,108,255,.32); border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(124,108,255,.16), rgba(32,214,255,.08));
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    }
+    .cta h2 { font-size: clamp(28px,4vw,44px); margin: 0; }
+    .cta p { margin: 10px 0 0; color: var(--muted); max-width: 650px; }
+
+    footer { border-top: 1px solid var(--border); padding: 24px 0 38px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 16px; }
+
+    @media (max-width: 820px) {
+      .toplinks a[href="#work"] { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 52px; min-height: auto; }
+      .identity-card { width: min(380px, 92%); transform: none; }
+      .section-head { grid-template-columns: 1fr; gap: 14px; }
+      .grid { grid-template-columns: 1fr; }
+      .card { min-height: 0; }
+      .principles { grid-template-columns: 1fr; }
+      .cta { flex-direction: column; align-items: flex-start; padding: 28px; }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 22px, 1120px); }
+      .topbar { padding-top: 17px; }
+      .toplinks { gap: 12px; }
+      .toplinks a { font-size: 13px; }
+      h1 { font-size: clamp(46px, 16vw, 66px); }
+      .lede { font-size: 18px; }
+      section { padding: 42px 0; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="shell">
+    <nav class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="/">BK</a>
+      <div class="toplinks">
+        <a href="#work">How I work</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://linkedin.com/in/brycek" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Operations · Quality · People · Technology</div>
+          <h1>I build better teams, processes, and <span>systems.</span></h1>
+          <p class="lede">
+            I’m Bryce. I work at the intersection of <strong>operations, quality, people, and technology</strong>. I lead teams, improve processes, and build practical tools that help manufacturing organizations make better decisions and get better results.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="projects.html">Explore selected work <span aria-hidden="true">↗</span></a>
+            <a class="button" href="https://github.com/bk-007" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button" href="https://www.instagram.com/brycekoning" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <aside class="identity-card" aria-label="About Bryce">
+          <div class="avatar">
+            <img src="https://res.cloudinary.com/dlo6pjmqi/image/upload/v1760144064/IMG_0948_rp4oee.jpg" alt="Bryce Koning" />
+          </div>
+          <div class="identity-meta">
+            <strong>Bryce Koning</strong>
+            <span>People and operations leader in Arizona</span>
+            <div class="status"><i aria-hidden="true"></i> Helping good people do even better work</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="work">
+        <div class="section-head">
+          <div>
+            <div class="kicker">What I actually do</div>
+            <h2>Improve the whole system.</h2>
+          </div>
+          <p class="section-copy">
+            I’m not interested in adding another meeting, spreadsheet, or process just so we can say we did something. I want people to understand the work, know what matters, have the tools they need, and feel trusted enough to make good decisions.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-num">01 / PEOPLE LEADERSHIP</div>
+            <h3>Build capable teams</h3>
+            <p>I set clear expectations, develop people through real responsibility, and build enough depth that the operation does not depend on one person knowing everything.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02 / OPERATIONS</div>
+            <h3>Connect operations and quality</h3>
+            <p>I look at how staffing, equipment, priorities, data, and communication affect one another. The issue is often not one bad decision. It is a system that was never designed to work as one.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03 / SYSTEMS & TECHNOLOGY</div>
+            <h3>Build practical technology</h3>
+            <p>I build apps, reports, databases, automations, and AI-assisted tools when they solve a real operational problem. The goal is not more software. It is faster analysis, clearer decisions, and less wasted work.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="kicker">How I lead</div>
+            <h2>How I lead.</h2>
+          </div>
+          <p class="section-copy">I believe strong teams come from clear expectations, fair decisions, honest feedback, and managers who understand the people doing the work. None of that is complicated, although organizations do enjoy proving otherwise.</p>
+        </div>
+
+        <div class="principles">
+          <div class="principle"><strong>Make ownership clear.</strong><span>People should know what matters, what they can decide, and what good work looks like.</span></div>
+          <div class="principle"><strong>Develop judgment, not dependence.</strong><span>I explain the reasoning, ask questions, and give people room to solve problems themselves.</span></div>
+          <div class="principle"><strong>Lead people individually.</strong><span>Different people need different levels of structure, freedom, feedback, and challenge.</span></div>
+          <div class="principle"><strong>Build systems that last.</strong><span>A strong team and a strong process should continue working without constant intervention.</span></div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div>
+          <h2>Better operations come from capable people and better systems.</h2>
+          <p>That is the space I like most: leading people, improving the operation, solving quality problems, and building tools that make the whole thing easier to run.</p>
+        </div>
+        <a class="button primary" href="projects.html">View the work</a>
+      </section>
+    </main>
+
+    <footer>
+      <span>Made in Arizona by Bryce and a statistically unreasonable number of AI-assisted iterations.</span>
+      <span>© <span id="year">2026</span></span>
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
