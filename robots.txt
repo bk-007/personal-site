@@ -1,0 +1,4 @@
+# Indexing is disabled with page-level noindex directives.
+# Crawlers must be allowed to access the pages to read those directives.
+User-agent: *
+Allow: /
