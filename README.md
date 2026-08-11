@@ -1,119 +1,110 @@
-# Bryce Koning
+# Bryce Koning — Personal Site
 
-**Operations · Quality · Manufacturing Systems · Automation**
+> **I close the gap between how work should run and how it actually runs.**
 
-I work at the point where people, processes, data, and technology meet.
+[View the site](https://brycek.me/) · [Selected work](https://brycek.me/projects.html) · [LinkedIn](https://linkedin.com/in/brycek) · [GitHub](https://github.com/bk-007)
 
-My background is in manufacturing quality and frontline operations, but a large part of my work has become building systems that make those operations easier to understand and run. Sometimes that means developing a team, redesigning a workflow, or improving how a process is owned. Other times it means writing Python, connecting production data, building a dashboard, creating an AI-assisted tool, or prototyping a physical solution.
+This repository contains my personal site: an intentionally lightweight introduction to how I lead people, improve manufacturing operations, and build practical systems.
 
-I am not interested in technology for its own sake. I use it when it helps people make better decisions, removes repetitive work, improves traceability, or closes the gap between how a process is supposed to work and how it actually works.
+## At a glance
 
-## What I work on
+| Area | What that looks like |
+| --- | --- |
+| **People** | Team development, clear ownership, coaching, and cross-training |
+| **Operations** | Process improvement, quality systems, traceability, and root-cause work |
+| **Data** | Production-data integration, dashboards, reporting, SQL, and Python |
+| **Technology** | Internal applications, automation, AI-assisted tools, and rapid prototypes |
 
-- Manufacturing operations and quality systems
-- Team development, training, and delegated ownership
-- Process improvement and root-cause problem solving
-- Production, inspection, and test-data integration
-- Internal applications and workflow automation
-- AI-assisted knowledge tools and reporting
-- Dashboards, traceability, and decision support
-- Rapid physical prototyping and 3D printing
+## The site
 
-## Technical toolkit
+The design uses an industrial editorial system built around the idea of **closing the gap**.
 
-### Software and data
+- Responsive layouts for desktop and mobile
+- Scroll- and pointer-driven hero motion
+- High-contrast monochrome portrait treatment
+- Eight generalized project case files
+- Reduced-motion and keyboard-accessibility support
+- No framework or build pipeline
 
-- **Python** for automation, data processing, internal applications, and reporting
-- **SQL and SQLite** for structured production and quality data
-- **Excel** for analysis, operational tools, and accessible end-user workflows
-- **Power BI** for dashboards and manufacturing visibility
-- **HTML, CSS, and JavaScript** for lightweight websites and interfaces
-- Data cleaning, transformation, comparison, and report generation
-- Desktop tools designed for people who should not need to know how the code works
+## Selected work
 
-### Microsoft and AI tools
+The project archive covers eight areas:
 
-- **Microsoft 365**, **SharePoint**, and connected team resources
-- **Copilot** and custom AI-assisted workflows
-- Prompt and instruction design for repeatable internal use
-- AI-supported document guidance, analysis, troubleshooting, and prototyping
-- Human review and verification built into the workflow, because AI is useful but remains impressively capable of being confidently wrong
+1. Building a capable, accountable quality team
+2. Developing talent beyond the org chart
+3. Consolidating scattered manufacturing data
+4. Making quality information easier to use
+5. Applying AI with human oversight
+6. Creating visible paths for employee growth
+7. Fixing the point where a process actually breaks
+8. Turning recurring problems into testable prototypes
 
-### Manufacturing and quality
+[Explore the full project archive →](https://brycek.me/projects.html)
 
-- Statistical process control and manufacturing-data analysis
-- Inspection planning, traceability, and quality-system design
-- Metrology and machine-vision workflows
-- Root-cause analysis and Lean Six Sigma methods
-- Cross-functional work across quality, production, engineering, testing, and IT
-- Standard work, competency development, and process ownership
+## Technical foundation
 
-### Prototyping
+| Layer | Implementation |
+| --- | --- |
+| Structure | Semantic HTML |
+| Styling | Custom responsive CSS |
+| Interaction | Small, dependency-free JavaScript |
+| Portrait | Optimized transparent WebP |
+| Hosting | Static-site compatible |
 
-- 3D printing and iterative fixture or workflow improvements
-- 3D scanning and physical-to-digital problem solving
-- CAD collaboration with engineering resources
-- Fast prototype-test-revise feedback loops with frontline users
+```text
+personal-site/
+├── index.html                  # Homepage
+├── projects.html               # Project archive
+├── styles.css                  # Shared visual system
+├── script.js                   # Motion and reveal behavior
+├── images/
+│   └── profile-cutout.webp     # Editorial portrait
+└── site.webmanifest
+```
 
-## Selected systems I have built
+## Run locally
 
-### Unified manufacturing data application
-
-Built a Python and SQLite application that consolidates production, inspection, and test information that previously lived across disconnected files and folders. The system links related work orders, calculates key metrics, compares runs, and produces usable reports.
-
-### Searchable quality ecosystem
-
-Connected inspection records, measurement data, work-order history, dashboards, and shared resources so quality information could be found and used without relying entirely on tribal knowledge.
-
-### AI-assisted operations tools
-
-Created internal assistants and smaller workflow tools for document guidance, analysis, reporting, data cleanup, and problem solving. The goal is not to remove human judgment. It is to give that judgment better information and reduce the time wasted getting to it.
-
-### Team capability systems
-
-Developed competency levels, cross-training paths, clearer expectations, and hands-on learning opportunities so employees could see how to grow and take on more responsibility over time.
-
-### Rapid operational prototypes
-
-Used software, 3D printing, scanning, and frontline feedback to turn recurring operational problems into testable solutions instead of allowing “someone should fix that” to become a permanent business process.
-
-## How I approach the work
-
-1. Observe how the work actually happens.
-2. Talk to the people closest to it.
-3. Separate the visible symptom from the underlying problem.
-4. Decide whether the answer is leadership, process, training, technology, or some combination of them.
-5. Build the smallest useful solution.
-6. Test it in the real operation.
-7. Improve it until it can function without depending on one person.
-
-The last part matters. A system is not very good if its creator has to stand beside it forever like an exhausted museum guide.
-
-## This website
-
-This repository contains my personal website, built as a lightweight static site using plain HTML, CSS, and JavaScript.
-
-No framework, build pipeline, or dependency maze is required.
-
-### Run locally
-
-Clone the repository and open `index.html` in a browser:
+Because the site is static, you can open `index.html` directly or serve the directory locally.
 
 ```bash
 git clone https://github.com/bk-007/personal-site.git
 cd personal-site
-open index.html
+python -m http.server 8000
 ```
 
-On Windows, open the folder and double-click `index.html`, a rare example of software behaving like a normal object.
+Then visit [http://localhost:8000](http://localhost:8000).
+
+<details>
+<summary><strong>How I approach the work</strong></summary>
+
+1. Observe how the work actually happens.
+2. Talk to the people closest to it.
+3. Separate the visible symptom from the underlying problem.
+4. Decide whether the answer is leadership, process, training, technology, or a combination.
+5. Build the smallest useful solution.
+6. Test it in the real operation.
+7. Improve it until it no longer depends on one person.
+
+</details>
+
+<details>
+<summary><strong>Tools I commonly work with</strong></summary>
+
+- Python, SQL, SQLite, HTML, CSS, and JavaScript
+- Excel, Power BI, Microsoft 365, and SharePoint
+- Manufacturing-data analysis and quality-system design
+- AI-assisted document guidance, reporting, and workflow automation
+- 3D printing, scanning, and iterative physical prototyping
+
+</details>
 
 ## Confidentiality
 
-The examples on the site are intentionally generalized. The underlying manufacturing data, product details, internal processes, and company information are confidential.
+The examples are intentionally generalized. Manufacturing data, product details, internal processes, and employer information remain confidential.
 
-## Links
+## Connect
 
-- Website: [brycek.me](https://brycek.me/)
-- LinkedIn: [linkedin.com/in/brycek](https://linkedin.com/in/brycek)
-- GitHub: [github.com/bk-007](https://github.com/bk-007)
-- Instagram: [instagram.com/brycekoning](https://www.instagram.com/brycekoning)
+- [Website](https://brycek.me/)
+- [LinkedIn](https://linkedin.com/in/brycek)
+- [GitHub](https://github.com/bk-007)
+- [Instagram](https://www.instagram.com/brycekoning)
