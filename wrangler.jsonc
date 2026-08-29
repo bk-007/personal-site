@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bryce-koning-personal-site",
+  "main": "worker.js",
+  "compatibility_date": "2026-05-22",
+  "assets": {
+    "binding": "ASSETS"
+  }
+}
