@@ -16,7 +16,7 @@ The personal portrait has been removed. Contextual manufacturing and technology 
 - Mobile-first layouts with large tap targets and zero horizontal overflow
 - Scroll-responsive hero depth, image movement, and staged reveals
 - Reduced-motion support and keyboard-visible focus states
-- Optimized local WebP imagery; no hotlinked production assets
+- Responsive source-hosted photography with mobile-sized variants
 - Custom Open Graph card for social sharing
 - Static HTML, CSS, and JavaScript with a Vite/Cloudflare production build
 
@@ -45,6 +45,10 @@ pnpm run build
 ```
 
 The production artifact is emitted to `dist/` with a Cloudflare Worker-compatible ESM entrypoint and OpenAI Sites metadata.
+
+## Publish from GitHub
+
+The displayed photography is loaded directly from the attributed Pexels and Unsplash image CDNs, with smaller responsive variants for phones. The deployed pages no longer depend on a separate `images/` directory, so GitHub's web uploader cannot accidentally omit the visible media.
 
 ## Confidentiality
 
