@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="43%" r="58%"><stop offset="0" stop-color="#0b1424"/><stop offset=".55" stop-color="#04070c"/><stop offset="1" stop-color="#000"/></radialGradient>
+  <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fbff"/><stop offset=".42" stop-color="#72a9ff"/><stop offset=".76" stop-color="#fff1c8"/><stop offset="1" stop-color="#477fff"/></linearGradient>
+  <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<g opacity=".25" fill="#9bc0ff"><circle cx="330" cy="165" r="2"/><circle cx="850" cy="190" r="1.5"/><circle cx="760" cy="415" r="1"/><circle cx="440" cy="450" r="1.5"/></g>
+<text x="600" y="350" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="270" font-weight="300" fill="#07101f" stroke="url(#stroke)" stroke-width="7" filter="url(#glow)">b</text>
+<circle cx="502" cy="150" r="5" fill="#fff" filter="url(#glow)"/>
+<path d="M502 128v44M480 150h44" stroke="#9bc5ff" stroke-width="2" opacity=".9"/>
+<text x="600" y="500" text-anchor="middle" fill="#f4f4f2" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="5">A site from Bryce</text>
+</svg>
