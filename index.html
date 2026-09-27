@@ -260,7 +260,13 @@ function burst(){
     stage.appendChild(p);p.onanimationend=()=>p.remove();
   }
 }
-async function run(){const token=++id;document.body.classList.remove("exploding","dissolving");document.querySelectorAll(".dust").forEach(e=>e.remove());after.classList.remove("show");flash.classList.remove("go");shock.classList.remove("go");msg.className="message";await sleep(250);for(const [t,h] of phrases){await phrase(t,h,token);await sleep(130)}if(token!==id)return;msg.textContent="Goodbye.";msg.className="message goodbye show";await sleep(170);burst();await sleep(reduced?450:2450);if(token===id)after.classList.add("show")}
+async function run(){const token=++id;document.body.classList.remove("exploding","dissolving");document.querySelectorAll(".dust").forEach(e=>e.remove());after.classList.remove("show");flash.classList.remove("go");shock.classList.remove("go");msg.className="message";await sleep(250);
+  await phrase(phrases[0][0],phrases[0][1],token);await sleep(130);
+  await phrase(phrases[1][0],phrases[1][1],token);await sleep(130);
+  if(token!==id)return;
+  msg.textContent=phrases[2][0];msg.className="message goodbye";void msg.offsetWidth;msg.classList.add("show");
+  await sleep(phrases[2][1]);if(token!==id)return;
+  burst();await sleep(reduced?450:2450);if(token===id)after.classList.add("show")}
 replay.onclick=run;run();
 </script>
 </body>
