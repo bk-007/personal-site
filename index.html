@@ -51,10 +51,38 @@ body.exploding .signature{display:none}
 .holiday-mark{position:fixed;right:max(18px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));z-index:5;color:var(--accent);opacity:.34;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:600px){.message{font-size:clamp(3.1rem,16vw,6rem)}}
 @media(prefers-reduced-motion:reduce){.stage:before{animation:none}.message{filter:none;transform:none}.flash,.shock,.particle,.shard{display:none!important}}
+
+/* Distinct seasonal personalities */
+.message{color:var(--text,var(--fg));font-family:var(--font,-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif);text-shadow:var(--text-shadow,none);transition:color .45s ease,text-shadow .45s ease}
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ambient i{position:absolute;display:block;will-change:transform,opacity}
+body[data-theme="halloween"] .message{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:-.035em;text-shadow:0 0 18px rgba(255,122,0,.28),0 3px 0 rgba(90,20,110,.3)}
+body[data-theme="halloween"] .stage:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 105%,rgba(255,93,0,.13),transparent 42%),linear-gradient(180deg,transparent 55%,rgba(87,31,110,.1));animation:halloweenPulse 4s ease-in-out infinite alternate}
+body[data-theme="thanksgiving"] .message{font-family:Georgia,"Times New Roman",serif;color:#f4c778;text-shadow:0 0 28px rgba(224,138,46,.22);letter-spacing:-.045em}
+body[data-theme="christmas"] .message{font-family:Georgia,"Times New Roman",serif;color:#fff6dd;text-shadow:0 0 22px rgba(255,244,210,.25),0 0 50px rgba(230,57,70,.14);letter-spacing:-.045em}
+body[data-theme="newyear"] .message{font-family:"Helvetica Neue",Arial,sans-serif;color:#fff5c9;font-weight:300;letter-spacing:-.055em;text-shadow:0 0 15px rgba(255,216,107,.42),0 0 50px rgba(112,183,255,.18)}
+body[data-theme="valentines"] .message{font-family:Georgia,"Times New Roman",serif;color:#ffd4e1;font-weight:500;letter-spacing:-.045em;text-shadow:0 0 25px rgba(255,79,135,.35)}
+body[data-theme="stpatricks"] .message{font-family:Georgia,"Times New Roman",serif;color:#dfffe9;text-shadow:0 0 22px rgba(53,201,111,.35),0 2px 0 rgba(216,195,106,.22)}
+body[data-theme="easter"] .message{font-family:Georgia,"Times New Roman",serif;color:#f5eaff;font-weight:500;text-shadow:0 0 24px rgba(201,167,255,.3);letter-spacing:-.04em}
+body[data-theme="july4"] .message{font-family:"Arial Black","Helvetica Neue",Arial,sans-serif;color:#fff;letter-spacing:-.06em;text-shadow:-3px 0 0 rgba(239,51,64,.72),3px 0 0 rgba(79,131,255,.72),0 0 25px rgba(255,255,255,.18)}
+body[data-theme="labor"] .message{font-family:"Helvetica Neue",Arial,sans-serif;color:#edf3ff;font-weight:650;letter-spacing:-.055em;text-shadow:0 0 24px rgba(115,147,201,.26)}
+body[data-theme="auto"] .message{color:#f5f5f2}
+.ambient .snow{width:var(--s);height:var(--s);border-radius:50%;background:#fff;opacity:var(--o);top:-10px;left:var(--x);animation:snowFall var(--d) linear infinite;animation-delay:var(--delay)}
+.ambient .ember{width:var(--s);height:var(--s);border-radius:50%;background:#ff7a00;box-shadow:0 0 8px #ff7a00;opacity:var(--o);bottom:-10px;left:var(--x);animation:emberRise var(--d) ease-in infinite;animation-delay:var(--delay)}
+.ambient .sparkle{width:3px;height:3px;border-radius:50%;background:var(--c);box-shadow:0 0 9px var(--c);left:var(--x);top:var(--y);animation:twinkle var(--d) ease-in-out infinite;animation-delay:var(--delay)}
+.ambient .heart{color:#ff7aa6;font-size:var(--s);left:var(--x);bottom:-30px;opacity:var(--o);animation:heartFloat var(--d) linear infinite;animation-delay:var(--delay)}
+.ambient .pastel{width:var(--s);height:var(--s);border-radius:50%;background:var(--c);left:var(--x);top:var(--y);opacity:.18;filter:blur(1px);animation:pastelFloat var(--d) ease-in-out infinite alternate}
+@keyframes halloweenPulse{to{filter:hue-rotate(10deg);opacity:.72}}
+@keyframes snowFall{to{transform:translate3d(var(--drift),110vh,0) rotate(180deg)}}
+@keyframes emberRise{to{transform:translate3d(var(--drift),-110vh,0) scale(.15);opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.12;transform:scale(.5)}50%{opacity:1;transform:scale(1.8)}}
+@keyframes heartFloat{to{transform:translate3d(var(--drift),-110vh,0) rotate(22deg);opacity:0}}
+@keyframes pastelFloat{to{transform:translate3d(20px,-18px,0) scale(1.18)}}
 </style>
 </head>
 <body>
 <main class="stage" aria-live="polite">
+<div class="ambient" aria-hidden="true"></div>
 <div class="wrap"><p class="message">Hello.</p></div>
 <div class="shock" aria-hidden="true"></div><div class="flash" aria-hidden="true"></div>
 <button class="signature" type="button" aria-label="Open site menu" style="border:0;background:none;padding:0">brycek.me</button>
@@ -104,12 +132,31 @@ const themeCatalog={
 let selectedTheme="auto",theme=autoTheme;
 function applyTheme(key){
   selectedTheme=key; theme=themeCatalog[key]||autoTheme;
+  const visualKey=key==="auto"?themeKeyForDate():key;
+  document.body.dataset.theme=visualKey;
   document.documentElement.style.setProperty("--bg",theme.bg);
   document.documentElement.style.setProperty("--accent",theme.a);
   document.documentElement.style.setProperty("--accent2",theme.b);
   document.documentElement.style.setProperty("--glow",theme.a+"22");
   document.querySelector(".holiday-mark").textContent=key==="auto"?(theme.name||"Auto"):theme.name;
   document.querySelectorAll(".theme-btn").forEach(b=>b.classList.toggle("active",b.dataset.theme===key));
+  buildAmbient(visualKey);
+}
+function themeKeyForDate(d=new Date()){
+  const t=themeFor(d).name;
+  return {"Halloween":"halloween","Thanksgiving":"thanksgiving","Christmas":"christmas","New Year":"newyear","Valentine's":"valentines","St. Patrick's":"stpatricks","Easter":"easter","Fourth of July":"july4","Labor Day":"labor"}[t]||"auto";
+}
+function buildAmbient(key){
+  const box=document.querySelector(".ambient"); if(!box)return; box.innerHTML="";
+  const add=(cls,n,html="")=>{for(let i=0;i<n;i++){const e=document.createElement("i");e.className=cls;e.innerHTML=html;e.style.setProperty("--x",Math.random()*100+"%");e.style.setProperty("--y",Math.random()*100+"%");e.style.setProperty("--s",(3+Math.random()*9)+"px");e.style.setProperty("--o",(.2+Math.random()*.55).toFixed(2));e.style.setProperty("--d",(5+Math.random()*8)+"s");e.style.setProperty("--delay",(-Math.random()*10)+"s");e.style.setProperty("--drift",((Math.random()-.5)*100)+"px");e.style.setProperty("--c",theme.particles[Math.floor(Math.random()*theme.particles.length)]);box.appendChild(e)}};
+  if(key==="christmas")add("snow",42);
+  else if(key==="halloween")add("ember",28);
+  else if(key==="newyear"||key==="july4")add("sparkle",34);
+  else if(key==="valentines")add("heart",18,"♥");
+  else if(key==="easter")add("pastel",24);
+  else if(key==="stpatricks")add("sparkle",22);
+  else if(key==="thanksgiving")add("ember",16);
+  else if(key==="labor")add("sparkle",15);
 }
 applyTheme("auto");
 
@@ -119,7 +166,7 @@ Object.keys(themeCatalog).forEach(key=>{
   const t=themeCatalog[key],b=document.createElement("button");b.type="button";b.className="theme-btn";b.dataset.theme=key;
   const colors=t.particles.slice(0,3).map(x=>'<i style="--dot:'+x+'"></i>').join("");
   b.innerHTML='<span class="theme-name">'+labels[key]+'</span><span class="theme-dots">'+colors+'</span>';
-  b.onclick=()=>{applyTheme(key);closeMenu()};grid.appendChild(b);
+  b.onclick=()=>{applyTheme(key);closeMenu();setTimeout(run,260)};grid.appendChild(b);
 });
 applyTheme("auto");
 function openMenu(){backdrop.classList.add("open");sheet.classList.add("open");closeButton.focus()}
