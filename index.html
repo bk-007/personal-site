@@ -11,12 +11,12 @@
 <meta property="og:url" content="https://brycek.me/">
 <meta property="og:title" content="A site from Bryce">
 <meta property="og:description" content="A site from Bryce">
-<meta property="og:image" content="https://brycek.me/favicon.ico">
+<meta property="og:image" content="https://brycek.me/og-card.svg">
 <meta property="og:site_name" content="A site from Bryce">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A site from Bryce">
 <meta name="twitter:description" content="A site from Bryce">
-<meta name="twitter:image" content="https://brycek.me/favicon.ico">
+<meta name="twitter:image" content="https://brycek.me/og-card.svg">
 <style>
 :root{color-scheme:dark;--bg:#050505;--fg:#f5f5f2;--accent:#f5f5f2;--accent2:#999;--glow:rgba(255,255,255,.12)}
 *{box-sizing:border-box}
@@ -73,7 +73,7 @@ body.dissolving .message{animation:none!important;opacity:1;filter:none;transfor
 body.dissolving .ambient,body.dissolving .psl,body.dissolving .holiday-mark,body.dissolving .signature,body.dissolving .menu-cue{animation:worldFade 1.7s ease .25s forwards!important}
 body.dissolving .stage:before{animation:worldFade 1.8s ease .3s forwards!important}
 @keyframes dustAway{0%{opacity:var(--o);transform:translate(0,0) rotate(0) scale(1)}35%{opacity:var(--o)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(.15)}}
-@keyframes textErode{0%{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 100%);mask-image:linear-gradient(90deg,#000 0%,#000 100%)}15%{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 100%)}100%{-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,transparent 100%);opacity:0;filter:blur(3px)}}
+@keyframes textErode{0%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}12%{clip-path:polygon(7% 0,100% 0,100% 100%,4% 100%,8% 82%,3% 68%,10% 52%,5% 35%,11% 17%)}30%{clip-path:polygon(23% 0,100% 0,100% 100%,18% 100%,25% 86%,17% 73%,28% 58%,20% 44%,29% 26%,21% 12%)}52%{clip-path:polygon(46% 0,100% 0,100% 100%,41% 100%,50% 84%,39% 70%,52% 55%,43% 38%,54% 23%,45% 10%)}75%{clip-path:polygon(70% 0,100% 0,100% 100%,65% 100%,74% 82%,63% 66%,77% 49%,67% 32%,78% 17%,69% 8%)}100%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);opacity:0;filter:blur(3px)}}
 @keyframes worldFade{to{opacity:0;filter:blur(4px);transform:translate(18px,-7px)}}
 .holiday-mark{position:fixed;right:max(18px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));z-index:5;color:var(--accent);opacity:.34;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:600px){.message{font-size:clamp(3.1rem,16vw,6rem)}}
@@ -156,7 +156,7 @@ function themeFor(d=new Date()){
   if(md>=1227||md<=102)return {name:"New Year",bg:"#02040a",a:"#ffd86b",b:"#70b7ff",particles:["#ffd86b","#70b7ff","#ff6b9d","#ffffff"]};
   if(md>=1201&&md<=1226)return {name:"Christmas",bg:"#06100b",a:"#e63946",b:"#f4e8c1",particles:["#e63946","#2a9d55","#f4e8c1","#ffffff"]};
   if(md>=1101&&md<=1130)return {name:"Thanksgiving",bg:"#160b04",a:"#e08a2e",b:"#f3c178",particles:["#e08a2e","#8f4e20","#f3c178","#b86b32"]};
-  if(md>=1001&&md<=1031)return {name:"Halloween",bg:"#08040d",a:"#ff7a00",b:"#8d4bd6",particles:["#ff7a00","#8d4bd6","#f3e6c8","#5b247a"]};
+  if(md>=920&&md<=1031)return {name:"Halloween",bg:"#08040d",a:"#ff7a00",b:"#8d4bd6",particles:["#ff7a00","#8d4bd6","#f3e6c8","#5b247a"]};
   if(md>=207&&md<=214)return {name:"Valentine's",bg:"#17040b",a:"#ff4f87",b:"#ffd1df",particles:["#ff4f87","#ff8fb3","#ffd1df","#ffffff"]};
   if(md>=301&&md<=317)return {name:"St. Patrick's",bg:"#031109",a:"#35c96f",b:"#d8c36a",particles:["#35c96f","#0f7d3e","#d8c36a","#ffffff"]};
   if(delta>=-14&&delta<=7)return {name:"Easter",bg:"#0b0915",a:"#c9a7ff",b:"#ffe49a",particles:["#c9a7ff","#ffd0df","#b8e8d0","#ffe49a"]};
@@ -178,8 +178,9 @@ const themeCatalog={
   labor:{name:"Labor Day",bg:"#070a10",a:"#e8edf5",b:"#7393c9",particles:["#e8edf5","#7393c9","#b9c7dc"]}
 };
 let selectedTheme="auto",theme=autoTheme;
-function applyTheme(key){
+function applyTheme(key,persist=true){
   selectedTheme=key; theme=themeCatalog[key]||autoTheme;
+  if(persist)try{localStorage.setItem("brycek-theme",key)}catch{}
   const visualKey=key==="auto"?themeKeyForDate():key;
   document.body.dataset.theme=visualKey;
   document.documentElement.style.setProperty("--bg",theme.bg);
@@ -206,7 +207,8 @@ function buildAmbient(key){
   else if(key==="thanksgiving")add("ember",16);
   else if(key==="labor")add("sparkle",15);
 }
-applyTheme("auto");
+let savedTheme="auto";try{const s=localStorage.getItem("brycek-theme");if(s&&themeCatalog[s])savedTheme=s}catch{}
+applyTheme(savedTheme,false);
 
 const backdrop=document.querySelector(".glass-backdrop"),sheet=document.querySelector(".glass-sheet"),siteButton=document.querySelector(".signature"),closeButton=document.querySelector(".glass-close"),grid=document.querySelector(".theme-grid");
 const labels={auto:"Auto",halloween:"Halloween",thanksgiving:"Thanksgiving",christmas:"Christmas",newyear:"New Year",valentines:"Valentine's",stpatricks:"St. Patrick's",easter:"Easter",july4:"Fourth of July",labor:"Labor Day"};
@@ -216,7 +218,7 @@ Object.keys(themeCatalog).forEach(key=>{
   b.innerHTML='<span class="theme-name">'+labels[key]+'</span><span class="theme-dots">'+colors+'</span>';
   b.onclick=()=>{applyTheme(key);closeMenu();setTimeout(run,260)};grid.appendChild(b);
 });
-applyTheme("auto");
+applyTheme(savedTheme,false);
 function openMenu(){backdrop.classList.add("open");sheet.classList.add("open");closeButton.focus()}
 function closeMenu(){backdrop.classList.remove("open");sheet.classList.remove("open");siteButton.focus()}
 siteButton.onclick=openMenu;closeButton.onclick=closeMenu;backdrop.onclick=closeMenu;addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
@@ -225,6 +227,7 @@ const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,sleep=ms=>n
 async function phrase(text,hold,token){if(token!==id)return;msg.className="message"+(text==="Goodbye."?" goodbye":"");msg.textContent=text;void msg.offsetWidth;msg.classList.add("show");await sleep(hold);if(token!==id)return;msg.classList.add("leave");await sleep(480)}
 function burst(){
   document.body.classList.add("dissolving");
+  const visualTheme=document.body.dataset.theme||"auto";
   if(reduced)return;
   const rect=msg.getBoundingClientRect(),count=Math.min(520,Math.max(260,Math.floor(rect.width*1.25)));
   const styles=getComputedStyle(msg),dustColors=[styles.color,theme.a,theme.b,"#a9a9a9","#6f6f6f"];
@@ -234,14 +237,22 @@ function burst(){
     const x=rect.left+rect.width*edge+(Math.random()-.5)*8;
     const y=rect.top+Math.random()*rect.height;
     const size=.7+Math.random()*(Math.random()<.12?5.5:2.6);
-    const drift=55+Math.random()*190+edge*90;
+    let drift=55+Math.random()*190+edge*90;
+    let dy=-35+(Math.random()-.5)*150;
+    if(visualTheme==="halloween"){drift*=.72;dy-=55+Math.random()*100;p.classList.add("smoke")}
+    else if(visualTheme==="christmas"){drift*=.38;dy=45+Math.random()*150;p.style.setProperty("--round","50%")}
+    else if(visualTheme==="newyear"||visualTheme==="july4"){drift*=1.35;dy=(Math.random()-.5)*230}
+    else if(visualTheme==="valentines"){drift*=.55;dy-=20+Math.random()*100;p.style.setProperty("--round","50%")}
+    else if(visualTheme==="easter"){drift*=.65;dy=(Math.random()-.5)*120}
+    else if(visualTheme==="stpatricks"){drift*=.8;dy-=Math.random()*90}
+    else if(visualTheme==="labor"){drift*=1.05;dy=(Math.random()-.5)*75}
     p.style.setProperty("--x0",x+"px");p.style.setProperty("--y0",y+"px");
     p.style.setProperty("--s",size+"px");p.style.setProperty("--o",(.25+Math.random()*.72).toFixed(2));
     p.style.setProperty("--round",Math.random()<.7?"50%":Math.floor(Math.random()*45)+"%");
     p.style.setProperty("--blur",Math.random()*5+"px");
     p.style.setProperty("--dust",dustColors[Math.floor(Math.random()*dustColors.length)]);
     p.style.setProperty("--dx",(drift+Math.random()*90)+"px");
-    p.style.setProperty("--dy",(-35+(Math.random()-.5)*150)+"px");
+    p.style.setProperty("--dy",dy+"px");
     p.style.setProperty("--rot",((Math.random()-.5)*720)+"deg");
     p.style.setProperty("--dur",(1050+Math.random()*1150)+"ms");
     p.style.setProperty("--delay",(edge*620+Math.random()*240)+"ms");
@@ -266,7 +277,7 @@ async function run(){const token=++id;document.body.classList.remove("exploding"
   if(token!==id)return;
   msg.textContent=phrases[2][0];msg.className="message goodbye";void msg.offsetWidth;msg.classList.add("show");
   await sleep(phrases[2][1]);if(token!==id)return;
-  burst();await sleep(reduced?450:2450);if(token===id)after.classList.add("show")}
+  burst();await sleep(reduced?450:2550);if(token!==id)return;await sleep(1750);if(token===id)after.classList.add("show")}
 replay.onclick=run;run();
 </script>
 </body>
