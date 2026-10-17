@@ -1,13 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<defs>
-  <radialGradient id="bg" cx="50%" cy="43%" r="58%"><stop offset="0" stop-color="#0b1424"/><stop offset=".55" stop-color="#04070c"/><stop offset="1" stop-color="#000"/></radialGradient>
-  <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fbff"/><stop offset=".42" stop-color="#72a9ff"/><stop offset=".76" stop-color="#fff1c8"/><stop offset="1" stop-color="#477fff"/></linearGradient>
-  <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<rect width="1200" height="630" fill="url(#bg)"/>
-<g opacity=".25" fill="#9bc0ff"><circle cx="330" cy="165" r="2"/><circle cx="850" cy="190" r="1.5"/><circle cx="760" cy="415" r="1"/><circle cx="440" cy="450" r="1.5"/></g>
-<text x="600" y="350" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="270" font-weight="300" fill="#07101f" stroke="url(#stroke)" stroke-width="7" filter="url(#glow)">b</text>
-<circle cx="502" cy="150" r="5" fill="#fff" filter="url(#glow)"/>
-<path d="M502 128v44M480 150h44" stroke="#9bc5ff" stroke-width="2" opacity=".9"/>
-<text x="600" y="500" text-anchor="middle" fill="#f4f4f2" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="5">A site from Bryce</text>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#081522"/><stop offset=".55" stop-color="#526274"/><stop offset=".9" stop-color="#d5a085"/><stop offset="1" stop-color="#f8cca5"/></linearGradient><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#4c6b70"/><stop offset=".34" stop-color="#173d4d"/><stop offset="1" stop-color="#03121f"/></linearGradient><radialGradient id="fade"><stop stop-color="#facb94" stop-opacity=".55"/><stop offset="1" stop-color="#facb94" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="380" fill="url(#sky)"/><circle cx="865" cy="289" r="80" fill="#ffe2ad"/><circle cx="865" cy="289" r="220" fill="url(#fade)"/><rect y="380" width="1200" height="250" fill="url(#sea)"/><path d="M0 430Q250 410 475 435T950 425T1200 435M0 490Q255 465 460 490T935 475T1200 496M0 550Q280 530 495 550T950 535T1200 552" stroke="#d6d3b7" stroke-opacity=".14" stroke-width="3" fill="none"/><rect x="0" y="0" width="1200" height="630" fill="#04121b" opacity=".22"/>
+<text x="67" y="92" font-size="22" letter-spacing="6" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#e9d8be">BRYCEK.ME</text>
+<text x="67" y="252" font-family="Georgia,serif" font-size="106" letter-spacing="-5" fill="#f7f4ed">A whole ocean.</text><text x="67" y="355" font-family="Georgia,serif" font-size="112" font-style="italic" letter-spacing="-5" fill="#f8d5a8">No agenda.</text>
+<text x="70" y="562" font-family="Arial,Helvetica,sans-serif" font-size="22" letter-spacing="3" fill="#e6eae9">A SITE FROM BRYCE</text>
 </svg>
