@@ -5,7 +5,7 @@
 (function(){
   var target=window.parent, fps=document.getElementById('fps'), err=document.getElementById('err'), announced=false;
   function tell(type){try{target.postMessage({source:'brycek-ocean',type:type},location.origin)}catch(e){}}
-  var success=new MutationObserver(function(){if(!announced&&/\\bfps\\b/.test(fps.textContent)){announced=true;success.disconnect();tell('ready')}});
+  var success=new MutationObserver(function(){if(!announced&&/\bfps\b/.test(fps.textContent)){announced=true;success.disconnect();tell('ready')}});
   success.observe(fps,{childList:true,subtree:true,characterData:true});
   var failure=new MutationObserver(function(){if(err.style.display==='block'){tell('failed');failure.disconnect()}});
   failure.observe(err,{attributes:true,attributeFilter:['style'],childList:true,subtree:true});
