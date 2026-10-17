@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08141d">
+<meta name="color-scheme" content="dark">
 <meta name="description" content="A little corner of the internet from Bryce. Come for the ocean, stay for absolutely no reason.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://brycek.me/">
@@ -92,6 +93,80 @@ body.gone .leave-screen{opacity:1;visibility:visible;pointer-events:auto}
 @media(max-width:395px){.shell{padding-top:17px}.topbar{gap:10px}.brandname{letter-spacing:.12em}.identity{gap:12px}.logo{width:36px;height:36px;font-size:21px}h1{font-size:clamp(58px,14.4vw,78px)}.hero{margin-top:30px}.intro{font-size:13px}.actions{margin-top:22px}.primary,.secondary{min-height:46px;padding:0 14px;font-size:9px}.footer{padding-top:13px;gap:11px}.footer-label{margin-bottom:8px}.scene-options{gap:5px}.scene-btn{padding:8px 10px;font-size:9px}.footer-hint{font-size:9px}}
 @media(max-height:690px) and (min-width:761px){h1{font-size:clamp(62px,8vw,100px);margin:18px 0}.hero{transform:none}.actions{margin-top:19px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Touch-first refinements. The desktop composition stays intact. */
+.drawer{visibility:hidden;pointer-events:none;transition:transform .5s cubic-bezier(.22,.85,.23,1),visibility 0s linear .5s}
+body.menu-open .drawer{visibility:visible;pointer-events:auto;transition:transform .5s cubic-bezier(.22,.85,.23,1),visibility 0s}
+
+.mobile-label{display:none}
+.touch-guide{display:none}
+@media(max-width:760px), (max-height:540px) and (max-width:950px){
+ html{height:auto;min-height:100%;overflow-x:clip}
+ body{min-height:100svh;overflow-x:clip;overflow-y:auto;overscroll-behavior-y:auto}
+ body.menu-open,body.gone{overflow:hidden}
+ #world{height:100svh;touch-action:pan-y}
+ #ocean{pointer-events:none}
+ body.engine-ready.immersed #ocean{pointer-events:auto}
+ .poster{inset:-3%}
+ .shell{height:auto;min-height:100svh;min-height:100dvh;max-width:100%;padding: max(21px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(22px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));}
+ .topbar{gap:10px}
+ .toplink{display:none}
+ .scene-indicator{display:none}
+ .identity{gap:12px;min-width:0}
+ .brandname{font-size:11px;letter-spacing:.13em}
+ .brandsub{font-size:9px;letter-spacing:.045em;white-space:nowrap}
+ .topright{gap:8px}
+ .menu-toggle{min-height:44px;gap:10px;letter-spacing:.12em;font-size:11px;white-space:nowrap}
+ .plus{width:34px;height:34px;flex:none}
+ .hero{max-width:100%;margin:clamp(45px,7svh,86px) 0 clamp(94px,14svh,155px);flex:0 0 auto;transform:none}
+ .eyebrow{font-size:9px;letter-spacing:.19em;gap:9px}
+ .eyebrow:before{width:19px}
+ h1{font-size:clamp(51px,14.7vw,77px);line-height:.94;margin:20px 0 21px;letter-spacing:-.074em;text-wrap:initial}
+ .intro{font-size:14px;line-height:1.66;max-width:360px}
+ .actions{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr);gap:9px;margin-top:23px;width:100%}
+ .actions .primary,.actions .secondary{min-width:0;min-height:52px;width:100%;padding:0 9px;gap:7px;font-size:10px;letter-spacing:.055em;white-space:nowrap}
+ .desktop-label{display:none}
+ .mobile-label{display:inline}
+ .footer{margin-top:auto;display:block;padding-top:16px;min-width:0}
+ .footer-label{font-size:10px;letter-spacing:.17em;margin-bottom:12px}
+ .scene-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%;min-width:0}
+ .scene-count{display:none}
+ .scene-btn{min-width:0;min-height:45px;padding:10px 3px;font-size:10px;letter-spacing:.035em;white-space:nowrap;text-align:center;touch-action:manipulation}
+ .footer-right{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px 12px;align-items:center;text-align:left}
+ .status{font-size:9px;letter-spacing:.08em;justify-content:flex-start;line-height:1.5}
+ .footer-hint{width:100%;font-size:11px;line-height:1.4;opacity:.67}
+ .immersive-tools{top:max(81px,calc(env(safe-area-inset-top) + 72px));left:20px;right:20px;flex-direction:row;justify-content:space-between;align-items:flex-start;gap:8px}
+ .tool-pill{min-height:44px;padding:11px 12px;font-size:9px;letter-spacing:.06em}
+ body.immersed .hero{transform:none}
+ .touch-guide{position:fixed;display:flex;align-items:center;justify-content:center;gap:13px;left:0;right:0;top:36%;z-index:11;opacity:0;pointer-events:none;font-size:9px;font-weight:760;letter-spacing:.15em;color:#f5eee1;text-align:center;text-shadow:0 2px 18px #001a27;transition:opacity .45s ease}
+ .touch-guide span{font-size:19px;font-weight:300;letter-spacing:0}
+ body.immersed:not(.engine-ready) .touch-guide:not(.touched){opacity:.83}
+ .drawer{width:100%;height:min(92dvh,840px);top:auto;bottom:0;border-left:0;border-top:1px solid rgba(255,255,255,.2);border-radius:26px 26px 0 0;padding:max(26px,env(safe-area-inset-top)) max(23px,env(safe-area-inset-right)) max(28px,env(safe-area-inset-bottom)) max(23px,env(safe-area-inset-left));transform:translateY(105%);box-shadow:0 -20px 65px rgba(0,0,0,.5)}
+ body.menu-open .drawer{transform:translateY(0)}
+ .drawer-top{margin-bottom:26px}
+ .drawer h2{font-size:clamp(44px,11vw,64px)}
+ .drawer p{line-height:1.65;margin-bottom:20px}
+ .drawer .rule{margin:24px 0}
+ .drawer-scene{min-height:78px;padding:14px}
+ .drawer-links a,.drawer-links button{min-height:49px;align-items:center}
+ .leave-screen{padding:22px}
+ .leave-screen h2{font-size:clamp(64px,17vw,110px)}
+ .leave-screen p{font-size:11px;letter-spacing:.08em}
+}
+@media(max-width:365px){
+ .brandname{font-size:10px}
+ .brandsub{font-size:8px}
+ h1{font-size:clamp(47px,14.3vw,54px)}
+ .hero{margin-top:40px;margin-bottom:65px}
+ .actions{grid-template-columns:1.1fr .9fr;gap:6px}
+ .actions .primary,.actions .secondary{font-size:9px;letter-spacing:.025em;padding:0 5px}
+ .scene-btn{font-size:9px}
+ .footer-label{font-size:9px}
+}
+@media(max-height:660px) and (pointer:coarse){
+ .hero{margin-top:38px;margin-bottom:74px}
+ .footer{padding-top:12px}
+}
 </style>
 </head>
 <body data-scene="golden">
@@ -109,17 +184,18 @@ body.gone .leave-screen{opacity:1;visibility:visible;pointer-events:auto}
  <div class="eyebrow">Hello, welcome to my site</div>
  <h1>A whole ocean.<em>No agenda.</em></h1>
  <p class="intro">I'm Bryce. I like making things just to see what's possible. This particular thing? It's an ocean. You’re welcome.</p>
- <div class="actions"><button type="button" class="primary" id="explore">EXPLORE THE HORIZON <span class="arrow-diagonal" aria-hidden="true">↗</span></button><button class="secondary" type="button" id="about">WHAT IS THIS? <span aria-hidden="true">＋</span></button></div>
+ <div class="actions"><button type="button" class="primary" id="explore"><span class="desktop-label">EXPLORE THE HORIZON</span><span class="mobile-label">EXPLORE THE OCEAN</span><span class="arrow-diagonal" aria-hidden="true">↗</span></button><button class="secondary" type="button" id="about">WHAT IS THIS? <span aria-hidden="true">＋</span></button></div>
 </main>
 <footer class="footer">
- <div><span class="footer-label">PICK A LITTLE ATMOSPHERE</span><div class="scene-options" role="group" aria-label="Ocean atmosphere"><button class="scene-btn" data-preset="golden" aria-pressed="true">01 / GOLDEN</button><button class="scene-btn" data-preset="dawn" aria-pressed="false">02 / DAWN</button><button class="scene-btn" data-preset="midnight" aria-pressed="false">03 / MIDNIGHT</button><button class="scene-btn" data-preset="storm" aria-pressed="false">04 / STORM</button></div></div>
- <div class="footer-right"><div class="status" aria-live="polite"><span class="status-dot"></span><span id="engine-status">CINEMATIC PREVIEW</span></div><p class="footer-hint" id="hint">Drag to look around · tap Explore for more</p></div>
+ <div><span class="footer-label">PICK A LITTLE ATMOSPHERE</span><div class="scene-options" role="group" aria-label="Ocean atmosphere"><button class="scene-btn" data-preset="golden" aria-label="Golden hour" aria-pressed="true"><span class="scene-count">01 / </span>GOLDEN</button><button class="scene-btn" data-preset="dawn" aria-label="Dawn" aria-pressed="false"><span class="scene-count">02 / </span>DAWN</button><button class="scene-btn" data-preset="midnight" aria-label="Midnight" aria-pressed="false"><span class="scene-count">03 / </span>MIDNIGHT</button><button class="scene-btn" data-preset="storm" aria-label="Storm" aria-pressed="false"><span class="scene-count">04 / </span>STORM</button></div></div>
+ <div class="footer-right"><div class="status" aria-live="polite"><span class="status-dot"></span><span id="engine-status">CINEMATIC PREVIEW</span></div><p class="footer-hint" id="hint">Move the cursor for a closer look</p></div>
 </footer>
 </div>
 <div class="scene-indicator" aria-hidden="true">NO COORDINATES / NO DESTINATION</div>
+<div class="touch-guide" aria-hidden="true">SWIPE THE SEA <span>← &nbsp; →</span> CHANGE THE SKY</div>
 <div class="immersive-tools"><button class="tool-pill" id="back">← BACK TO SHORE</button><button class="tool-pill" id="immersive-menu">CHANGE THE VIBE ＋</button></div>
 <div class="drawer-shade" id="drawer-shade"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-heading" aria-hidden="true">
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-heading" aria-hidden="true" inert>
   <div class="drawer-top"><span>BRYCEK.ME / 001</span><button class="close-drawer" id="close-menu" aria-label="Close menu">×</button></div>
   <h2 id="drawer-heading">A little bit<br>of nowhere.</h2>
   <p>No pitch. No newsletter. Not even a useful button. Just a small experiment in making the internet feel fun again.</p>
@@ -143,10 +219,14 @@ const $=(id)=>document.getElementById(id), frame=$('ocean'), status=$('engine-st
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile=window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 720;
 let active='golden', initialized=false, ready=false, loading=false, failsafe=null, menuWasOpenedFrom=null;
+const moodKeys=Object.keys(scenes), touchGuide=document.querySelector('.touch-guide');
+const threeD=$('high-fidelity');
+if(!('gpu' in navigator)){threeD.disabled=true;threeD.firstChild.textContent='FULL 3D NEEDS WEBGPU';threeD.title='Use a browser and device that support WebGPU to enable the live ocean';}
+if(mobile){hint.textContent='Swipe the open sea to change the sky';}
 function setStatus(value){status.textContent=value}
 function loadOcean(force=false){
- if(!('gpu' in navigator)){setStatus('CINEMATIC PREVIEW · WEBGPU UNAVAILABLE');return}
- if((mobile||reduced||navigator.connection?.saveData)&&!force){setStatus('CINEMATIC PREVIEW · BATTERY FRIENDLY');return}
+ if(!('gpu' in navigator)){setStatus(mobile?'AMBIENT OCEAN · TOUCH READY':'CINEMATIC PREVIEW · WEBGPU UNAVAILABLE');return}
+ if((mobile||reduced||navigator.connection?.saveData)&&!force){setStatus('AMBIENT OCEAN · LOW POWER');return}
  if(loading){return}
  loading=true;ready=false;document.body.classList.remove('engine-ready');
  setStatus('BUILDING THE HORIZON…');
@@ -154,7 +234,7 @@ function loadOcean(force=false){
  frame.src='/ocean-engine.html?'+settings.toString();
  initialized=true;
  clearTimeout(failsafe);
- failsafe=setTimeout(()=>{if(!ready){loading=false;frame.removeAttribute('src');setStatus('CINEMATIC PREVIEW · 3D UNAVAILABLE');}},25000);
+ failsafe=setTimeout(()=>{if(!ready){loading=false;frame.removeAttribute('src');setStatus(mobile?'AMBIENT OCEAN · TOUCH READY':'CINEMATIC PREVIEW · 3D UNAVAILABLE');}},25000);
 }
 function preset(name){
  if(!Object.prototype.hasOwnProperty.call(scenes,name))return;
@@ -173,14 +253,14 @@ window.addEventListener('message',e=>{
    if(!initialized)return;clearTimeout(failsafe);ready=true;loading=false;document.body.classList.add('engine-ready');setStatus('LIVE OCEAN · WEBGPU');
    hint.textContent=mobile?'Tap and drag to look · ocean controls may vary':'Click the water to fly · WASD move · Esc release · H settings';
  }else if(e.data.type==='failed'){
-   clearTimeout(failsafe);ready=false;loading=false;frame.removeAttribute('src');document.body.classList.remove('engine-ready');setStatus('CINEMATIC PREVIEW · 3D UNAVAILABLE');
+   clearTimeout(failsafe);ready=false;loading=false;frame.removeAttribute('src');document.body.classList.remove('engine-ready');setStatus(mobile?'AMBIENT OCEAN · TOUCH READY':'CINEMATIC PREVIEW · 3D UNAVAILABLE');
  }
 });
-function openMenu(){menuWasOpenedFrom=document.activeElement;document.body.classList.add('menu-open');$('open-menu').setAttribute('aria-expanded','true');$('drawer').setAttribute('aria-hidden','false');$('close-menu').focus()}
-function closeMenu(){document.body.classList.remove('menu-open');$('open-menu').setAttribute('aria-expanded','false');$('drawer').setAttribute('aria-hidden','true');(menuWasOpenedFrom||$('open-menu')).focus()}
+function openMenu(){menuWasOpenedFrom=document.activeElement;$('drawer').inert=false;document.body.classList.add('menu-open');$('open-menu').setAttribute('aria-expanded','true');$('drawer').setAttribute('aria-hidden','false');$('close-menu').focus()}
+function closeMenu(){document.body.classList.remove('menu-open');$('open-menu').setAttribute('aria-expanded','false');$('drawer').setAttribute('aria-hidden','true');(menuWasOpenedFrom||$('open-menu')).focus();$('drawer').inert=true}
 $('open-menu').addEventListener('click',openMenu);$('about').addEventListener('click',openMenu);$('immersive-menu').addEventListener('click',openMenu);$('close-menu').addEventListener('click',closeMenu);$('drawer-shade').addEventListener('click',closeMenu);
 $('high-fidelity').addEventListener('click',()=>{closeMenu();loadOcean(true)});
-function explore(){document.body.classList.add('immersed');if(!initialized&&('gpu' in navigator))loadOcean(true);if(ready){frame.focus();try{frame.contentDocument?.querySelector('#c')?.requestPointerLock?.()}catch{}}}
+function explore(){document.body.classList.add('immersed');if(!mobile&&!initialized&&('gpu' in navigator))loadOcean(true);if(ready&&!mobile){frame.focus();try{frame.contentDocument?.querySelector('#c')?.requestPointerLock?.()}catch{}}}
 $('explore').addEventListener('click',explore);
 $('back').addEventListener('click',()=>{try{document.exitPointerLock?.()}catch{}document.body.classList.remove('immersed')});
 $('goodbye').addEventListener('click',()=>{closeMenu();document.body.classList.add('gone');$('return').focus()});
@@ -200,6 +280,23 @@ window.addEventListener('pointermove',e=>{
  document.documentElement.style.setProperty('--pan-x',x.toFixed(1)+'px');
  document.documentElement.style.setProperty('--pan-y',y.toFixed(1)+'px');
 },{passive:true});
+// The ambient ocean responds to swipes without hijacking vertical page scrolling.
+const world=$('world');
+let swipeStart=null;
+world.addEventListener('pointerdown',e=>{
+ if(!mobile||ready||reduced||document.body.classList.contains('menu-open'))return;
+ swipeStart={x:e.clientX,y:e.clientY,id:e.pointerId};
+},{passive:true});
+world.addEventListener('pointerup',e=>{
+ if(!swipeStart||swipeStart.id!==e.pointerId)return;
+ const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;
+ swipeStart=null;
+ if(Math.abs(dx)<45||Math.abs(dx)<Math.abs(dy)*1.25)return;
+ const next=(moodKeys.indexOf(active)+(dx<0?1:moodKeys.length-1))%moodKeys.length;
+ preset(moodKeys[next]);
+ touchGuide.classList.add('touched');
+},{passive:true});
+world.addEventListener('pointercancel',()=>{swipeStart=null},{passive:true});
 window.addEventListener('pagehide',()=>clearTimeout(failsafe));
 loadOcean();
 })();
